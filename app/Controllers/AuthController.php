@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Users;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
 
@@ -83,5 +84,66 @@ class AuthController extends ResourceController
     public function delete($id = null)
     {
         //
+    }
+
+    public function store()
+    {
+        $rules = [
+            'cedula' => 'required|is_unique[users.cedula]',
+            'username' => 'required|is_unique[users.username]',
+            'email' => 'required|is_unique[users.email]',
+            'password' => 'required|min_lenght[8]',
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errores', $this->validator->getErrors());
+        }
+
+        $userModel = new Users();
+        $data = [
+            'cedula' => $this->request->getPost('cedula'),
+            'username' => $this->request->getPost('username'),
+            'email' => $this->request->getPost('email'),
+            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+            'active' => 0,
+        ];
+
+        $userModel->insert($data);
+        return redirect()->to('/login')->with('message', 'Registro exitoso. Espera la aprobación del administrador.');
+
+        //
+    }
+
+    public function authenticate()
+    {
+        $userModel = new Users();
+        $user = $userModel->where('username', $this->request->getPost('username'))->first();
+
+        if(!$user || !password_verify($this->request->getPost('password'), $user['password'])) {
+            return redirect()->back()->with('error', 'Credenciales inválidas');
+        }
+
+        if($user['active'] == 0) {
+            return redirect()->back()->with('error', 'Este usuario necesita ser aprobado por el administrador.');
+        }
+
+        session()->set(['user_id' => $user['id'], 'username' => $user['username'], 'isLoggedIn' => true]);
+        return redirect()->to('/dashboard');
+    }
+
+    public function register() 
+    {
+        return view('auth/register');
+    }
+
+    public function login() 
+    {
+        return view('auth/login');
+    }
+
+    public function logout()
+    {
+        session()->destroy();
+        return redirect()->to('/login')->with('success', 'Sesión cerrada');
     }
 }
