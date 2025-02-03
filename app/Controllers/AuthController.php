@@ -127,8 +127,15 @@ class AuthController extends ResourceController
             return redirect()->back()->with('error', 'Este usuario necesita ser aprobado por el administrador.');
         }
 
-        session()->set(['user_id' => $user['id'], 'username' => $user['username'], 'isLoggedIn' => true]);
-        return redirect()->to('/dashboard');
+        $sessionData = [
+            'user_id'   => $user['id'],
+            'username'  => $user['username'],
+            'email'     => $user['email'],
+            'isLoggedIn'=> true
+        ];
+
+        session()->set($sessionData);
+        return redirect()->to('/home')->with('success', 'Inicio de sesión exitoso');
     }
 
     public function register() 
