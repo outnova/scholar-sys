@@ -15,7 +15,9 @@
                         <h4>Registro de Usuario</h4>
                     </div>
                     <div class="card-body">
-                        <form action="<?= site_url('store') ?>" method="post">
+                        <form action="<?= site_url('auth/store') ?>" method="post">
+                            <?= csrf_field(); ?>
+
                             <div class="mb-3">
                                 <label for="cedula" class="form-label">Cédula</label>
                                 <input type="text" class="form-control" id="cedula" name="cedula" required>
