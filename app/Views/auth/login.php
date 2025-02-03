@@ -15,7 +15,7 @@
                         <h4>Iniciar Sesión</h4>
                     </div>
                     <div class="card-body">
-                        <form action="<?= site_url('auth/login') ?>" method="post">
+                        <form action="<?= site_url('auth/authenticate') ?>" method="post">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Usuario</label>
                                 <input type="text" class="form-control" id="username" name="username" required>
