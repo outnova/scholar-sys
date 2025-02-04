@@ -120,11 +120,15 @@ class AuthController extends ResourceController
         $user = $userModel->where('username', $this->request->getPost('username'))->first();
 
         if(!$user || !password_verify($this->request->getPost('password'), $user['password'])) {
-            return redirect()->back()->with('error', 'Credenciales inválidas');
+            session()->setFlashdata('error', 'Credenciales inválidas. Inténtalo de nuevo.');
+            return redirect()->to('/login');
+            //return redirect()->back()->with('error', 'Credenciales inválidas');
         }
 
         if($user['active'] == 0) {
-            return redirect()->back()->with('error', 'Este usuario necesita ser aprobado por el administrador.');
+            session()->setFlashdata('error', 'Tu cuenta aún no ha sido aprobada por el administrador.');
+            return redirect()->to('/login');
+            //return redirect()->back()->with('error', 'Este usuario necesita ser aprobado por el administrador.');
         }
 
         $sessionData = [
