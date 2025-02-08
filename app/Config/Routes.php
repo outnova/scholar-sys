@@ -5,8 +5,9 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
+$routes->addRedirect('/', '/login'); // Redirección de "/" a "/home"
 $routes->get('/home', 'Home::index');
-$routes->addRedirect('/', '/home'); // Redirección de "/" a "/home"
+
 
 $routes->get('/register', 'AuthController::register');
 $routes->get('/login', 'AuthController::login');
