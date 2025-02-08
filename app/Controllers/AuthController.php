@@ -149,6 +149,9 @@ class AuthController extends ResourceController
 
     public function login() 
     {
+        if (session()->get('isLoggedIn')) {
+            return redirect()->to('/home');
+        }
         return view('auth/login');
     }
 
