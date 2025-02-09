@@ -69,7 +69,7 @@
                         </div>
                     </form>
                     <div class="card-footer text-center mt-3">
-                        <a href="<?= site_url('register') ?>">¿No tienes cuenta? Regístrate</a>
+                        <a href="<?= site_url('register') ?>" class="text-decoration-none">¿No tienes cuenta? Regístrate</a>
                     </div>
                 </div>
             </div>
