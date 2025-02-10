@@ -9,19 +9,33 @@
 <body class="bg-light">
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="card shadow-lg">
-                    <div class="card-header bg-primary text-white text-center">
+                    <div class="text-center p-3">
                         <h4>Registro de Usuario</h4>
                     </div>
                     <div class="card-body">
                         <form action="<?= site_url('auth/store') ?>" method="post">
                             <?= csrf_field(); ?>
 
-                            <div class="mb-3">
-                                <label for="cedula" class="form-label">Cédula</label>
-                                <input type="text" class="form-control" id="cedula" name="cedula" required>
+                            <div class="row g-2">
+                                <div class="col-sm-4">
+                                    <label for="nacionalidad" class="form-label">Tipo</label>
+                                    <select class="form-select" aria-label="Default select example">
+                                        <!--<option selected>Open this select menu</option>-->
+                                        <option value="1">V</option>
+                                        <option value="2">E</option>
+                                        <option value="3">P</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="mb-3">
+                                        <label for="cedula" class="form-label">Cédula</label>
+                                        <input type="text" class="form-control" id="cedula" name="cedula" required>
+                                    </div>
+                                </div>
                             </div>
+
                             <div class="mb-3">
                                 <label for="username" class="form-label">Usuario</label>
                                 <input type="text" class="form-control" id="username" name="username" required>
@@ -38,7 +52,7 @@
                         </form>
                     </div>
                     <div class="card-footer text-center">
-                        <a href="<?= site_url('login') ?>">¿Ya tienes una cuenta? Inicia sesión</a>
+                        <a href="<?= site_url('login') ?>" class="text-decoration-none">¿Ya tienes una cuenta? Inicia sesión</a>
                     </div>
                 </div>
             </div>
