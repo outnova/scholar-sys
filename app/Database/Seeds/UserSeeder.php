@@ -9,7 +9,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         $data = [
-            'cedula' => '99999999',
+            'cedula' => 'V-99999999',
             'username' => 'admin',
             'email'    => 'example@domain.com',
             'password' => password_hash('admin', PASSWORD_DEFAULT),
