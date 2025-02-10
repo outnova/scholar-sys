@@ -89,9 +89,9 @@ class AuthController extends ResourceController
     public function store()
     {
         $rules = [
-            'cedula' => 'required|is_unique[users.cedula]',
+            'cedula' => 'required|is_unique[users.cedula]|numeric',
             'username' => 'required|is_unique[users.username]',
-            'email' => 'required|is_unique[users.email]',
+            'email' => 'required|is_unique[users.email]|valid_email',
             'password' => 'required|min_lenght[8]',
         ];
 
