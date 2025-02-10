@@ -14,7 +14,9 @@ class AddUsersTable extends Migration
                 'type' => 'SERIAL', 
             ],
             'cedula' => [
-                'type' => 'BIGINT', 
+                'type' => 'VARCHAR',
+                'constraint' => 15,
+                'null' => false,
                 'unique' => true,
             ],
             'username' => [
