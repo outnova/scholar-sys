@@ -88,20 +88,61 @@ class AuthController extends ResourceController
 
     public function store()
     {
+        $userModel = new Users();
+
+        $nacionalidad = $this->request->getPost('nacionalidad');
+        $cedula = $this->request->getPost('cedula');
+        $cedulaCompleta = $nacionalidad . '-' . $cedula;
+
+        $existeCedula = $userModel->where('cedula', $cedulaCompleta)->first();
+
         $rules = [
-            'cedula' => 'required|is_unique[users.cedula]|numeric',
-            'username' => 'required|is_unique[users.username]',
-            'email' => 'required|is_unique[users.email]|valid_email',
-            'password' => 'required|min_lenght[8]',
+            'cedula' => [
+                'label' => 'Cédula',
+                'rules' => 'required|regex_match[/^[0-9]{6,9}$/]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                    'regex_match' => 'La {field} debe contener entre 6 y 9 dígitos numéricos.',
+                    'is_unique' => 'La {field} ya está registrada en el sistema.'
+                ]
+            ],
+            'username' => [
+                'label' => 'Usuario',
+                'rules' => 'required|is_unique[users.username]',
+                'errors' => [
+                    'required' => 'El {field} es obligatorio.',
+                    'is_unique' => 'El {field} ya está en uso, prueba con otro.'
+                ]
+            ],
+            'email' => [
+                'label' => 'Correo Electrónico',
+                'rules' => 'required|is_unique[users.email]|valid_email',
+                'errors' => [
+                    'required' => 'El {field} es obligatorio.',
+                    'valid_email' => 'El {field} no tiene un formato válido.',
+                    'is_unique' => 'El {field} ya está registrado.'
+                ]
+            ],
+            'password' => [
+                'label' => 'Contraseña',
+                'rules' =>  'required|min_length[8]',
+                'errors' => [
+                    'required' => 'La {field} es obligatoria.',
+                    'min_length' => 'La {field} debe tener al menos 8 caracteres.'
+                ]
+            ]
         ];
+
+        if($existeCedula) {
+            return redirect()->back()->withInput()->with('errores', ['cedula' => 'La cédula ya está registrada en el sistema.']);
+        }
 
         if (!$this->validate($rules)) {
             return redirect()->back()->withInput()->with('errores', $this->validator->getErrors());
         }
 
-        $userModel = new Users();
         $data = [
-            'cedula' => $this->request->getPost('cedula'),
+            'cedula' => $cedulaCompleta,
             'username' => $this->request->getPost('username'),
             'email' => $this->request->getPost('email'),
             'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
