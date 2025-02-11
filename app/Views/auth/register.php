@@ -15,17 +15,27 @@
                         <h4>Registro de Usuario</h4>
                     </div>
                     <div class="card-body">
+                        <?php if (session()->has('errores')): ?>
+                            <div class="alert alert-danger">
+                                <p>Corrige los siguientes errores:</p>
+                                <ul>
+                                    <?php foreach (session('errores') as $error): ?>
+                                        <li><?= esc($error) ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
                         <form action="<?= site_url('auth/store') ?>" method="post">
                             <?= csrf_field(); ?>
 
                             <div class="row g-2">
                                 <div class="col-sm-4">
                                     <label for="nacionalidad" class="form-label">Tipo</label>
-                                    <select class="form-select" aria-label="Default select example">
+                                    <select class="form-select" aria-label="Default select example" id="nacionalidad" name="nacionalidad">
                                         <!--<option selected>Open this select menu</option>-->
-                                        <option value="1">V</option>
-                                        <option value="2">E</option>
-                                        <option value="3">P</option>
+                                        <option value="V">V</option>
+                                        <option value="E">E</option>
+                                        <option value="P">P</option>
                                     </select>
                                 </div>
                                 <div class="col-sm">
