@@ -34,6 +34,10 @@
             width: 120px;
             margin-bottom: 1rem;
         }
+
+        .form-floating {
+            zoom: 75%;
+        }
     </style>
 </head>
 <body>
@@ -54,15 +58,18 @@
                     <?php if (session()->getFlashdata('error')): ?>
                         <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
                     <?php endif; ?>
+                    <?php if (session()->getFlashdata('message')): ?>
+                        <div class="alert alert-warning"><?= session()->getFlashdata('message') ?></div>
+                    <?php endif; ?>
                     <form action="<?= base_url('auth/authenticate') ?>" method="post">
                         <?= csrf_field() ?>
-                        <div class="mb-3">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="username" name="username" id="floatingUsername" placeholder="Usuario" required>
                             <label for="username" class="form-label">Usuario</label>
-                            <input type="text" class="form-control" id="username" name="username" required>
                         </div>
-                        <div class="mb-3">
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="password" name="password" id="floatingPassword" placeholder="Contraseña" required>
                             <label for="password" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
                         </div>
                         <div class="d-flex justify-content-center">
                             <button type="submit" class="btn btn-primary w-50">Acceder</button>
