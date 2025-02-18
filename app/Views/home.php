@@ -28,6 +28,12 @@
                 </div>
                 <!-- Sidebar Navigation -->
                 <ul class="sidebar-nav">
+                    <li class="sidebar-item">
+                        <a href="<?= site_url('home') ?>" class="sidebar-link">
+                            <i class="fa-solid fa-house pe-2"></i>
+                            Menú principal
+                        </a>
+                    </li>
                     <li class="sidebar-header">
                         Tools & Components
                     </li>
