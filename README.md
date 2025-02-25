@@ -1,68 +1,95 @@
-# CodeIgniter 4 Application Starter
+# Manual de Instalación - Scholar-sys
 
-## What is CodeIgniter?
+## Requisitos Previos
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+Antes de comenzar, asegúrate de tener instalado en tu sistema:
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+- **PHP** 8.0 o superior
+- **Composer** (https://getcomposer.org/)
+- **Git** (https://git-scm.com/)
+- **Servidor Web** (XAMPP, Apache o Nginx)
+- **Base de Datos** (MySQL o PostgreSQL)
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+## Paso 1: Clonar el Repositorio
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+Abre una terminal y ejecuta el siguiente comando para clonar el repositorio:
 
-## Installation & updates
+```bash
+git clone https://github.com/outnova/scholar-sys.git
+```
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+Luego, entra en la carpeta del proyecto:
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+```bash
+cd scholar-sys
+```
 
-## Setup
+## Paso 2: Instalar Dependencias
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+Ejecuta el siguiente comando para instalar las dependencias del proyecto con Composer:
 
-## Important Change with index.php
+```bash
+composer install
+```
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+## Paso 3: Configurar el Entorno
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+Copia el archivo de configuración de entorno:
 
-**Please** read the user guide for a better explanation of how CI4 works!
+```bash
+cp env .env
+```
 
-## Repository Management
+Abre el archivo `.env` con un editor de texto y asegúrate de configurar correctamente los siguientes valores:
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+```ini
+CI_ENVIRONMENT = development
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+database.default.hostname = localhost
+database.default.database = nombre_base_datos
+database.default.username = usuario_bd
+database.default.password = contraseña_bd
+database.default.DBDriver = PostgreSQL  # O MySQL según tu caso
+```
 
-## Server Requirements
+## Paso 4: Ejecutar Migraciones
 
-PHP version 8.1 or higher is required, with the following extensions installed:
+Antes de ejecutar las migraciones, crea la base de datos usando el gestor de su preferencia usando la configuración que colocaste en el archivo `.env`
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+Luego, ejecuta las migraciones con el comando:
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
+```bash
+php spark migrate
+```
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+Si hay datos de prueba (seeders), puedes ejecutarlos con:
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+```bash
+php spark db:seed NombreDelSeeder
+```
+
+## Paso 5: Configurar Permisos
+
+Asegúrate de que los directorios `writable` y `logs` tengan los permisos correctos: (esto es opcional)
+
+```bash
+chmod -R 777 writable
+```
+
+## Paso 6: Iniciar el Servidor Local
+
+Para iniciar el servidor de desarrollo de CodeIgniter 4, usa:
+
+```bash
+php spark serve
+```
+
+El servidor correrá por defecto en `http://localhost:8080/`. Si deseas cambiar el puerto:
+
+```bash
+php spark serve --port=8000
+```
+
+## ¡Listo!
+
+Ya puedes acceder a tu aplicación en el navegador.
