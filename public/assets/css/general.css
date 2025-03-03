@@ -1,0 +1,8 @@
+html, body {
+    height: 100%; /* Asegura que el body ocupe toda la altura de la ventana */
+    display: flex;
+    flex-direction: column; /* Coloca el contenido en una columna */
+}
+.main-content {
+    flex: 1; /* Hace que el contenido principal ocupe el espacio restante */
+}
