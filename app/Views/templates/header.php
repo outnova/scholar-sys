@@ -3,7 +3,7 @@
         <aside id="sidebar" class="sidebar">
             <div class="h-100">
                 <div class="sidebar-logo">
-                    <a href="#">System Name</a>
+                    <a href="#"><?= esc(get_setting('system_name')) ?></a>
                 </div>
                 <div class="row g-2 sidebar-info">
                     <div class="col-auto">
@@ -24,6 +24,27 @@
                     </li>
                     <li class="sidebar-header">
                         Módulos
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#records"
+                            aria-expanded="false" aria-controls="records">
+                            <i class="fa-regular fa-file-lines pe-2"></i>
+                            Constancias
+                        </a>
+                        <ul id="records" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link">Emitir</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link">Consultar</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link">Modificar</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link">Eliminar</a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="sidebar-header">
                         Tools & Components
@@ -93,10 +114,10 @@
                         </a>
                         <ul id="admin" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">Login</a>
+                                <a href="<?= site_url('admin/settings') ?>" class="sidebar-link">Configuración</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">Register</a>
+                                <a href="<?= site_url('admin/users') ?>" class="sidebar-link">Usuarios</a>
                             </li>
                         </ul>
                     </li>
