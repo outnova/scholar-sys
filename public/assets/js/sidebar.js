@@ -29,64 +29,50 @@ document.addEventListener("DOMContentLoaded", function () {
     const sidebar = document.querySelector("#sidebar");
     const toggler = document.querySelector(".btn");
 
-    // Función para manejar la visibilidad del sidebar según el tamaño de la pantalla
     function handleSidebarState() {
         if (window.innerWidth >= 768) {
-            // En pantallas grandes, mostramos el sidebar siempre
-            sidebar.classList.remove("collapsed"); // Asegurarse de que esté visible
-            sidebar.classList.add("open"); // El sidebar está "abierto"
-            toggler.style.display = "none";  // Ocultamos el botón
+            sidebar.classList.remove("collapsed");
+            sidebar.classList.add("open");
+            toggler.style.display = "none";
         } else {
-            // En pantallas pequeñas, el sidebar está oculto al inicio
-            sidebar.classList.add("collapsed"); // Estará colapsado por defecto
-            sidebar.classList.remove("open"); // No debe estar abierto inicialmente
-            toggler.style.display = "block"; // Mostramos el botón
+            sidebar.classList.add("collapsed");
+            sidebar.classList.remove("open");
+            toggler.style.display = "block";
+        }
+        handleSidebarScroll(); // Asegurar que el scroll se gestione correctamente
+    }
+
+    function handleSidebarScroll() {
+        if (!sidebar) {
+            console.error('Sidebar element not found.');
+            return;
+        }
+
+        // Obtener la altura de la ventana y del sidebar
+        const windowHeight = window.innerHeight;
+        const sidebarHeight = sidebar.scrollHeight;
+
+        // Habilitar o deshabilitar el scroll
+        if (sidebarHeight > windowHeight) {
+            sidebar.style.overflowY = 'auto';
+        } else {
+            sidebar.style.overflowY = 'hidden';
         }
     }
 
-    // Detectar cambios de tamaño de la ventana
+    // Eventos
     window.addEventListener("resize", function () {
         handleSidebarState();
     });
 
-    // Ejecutar al cargar la página
-    handleSidebarState();
-
-    // Evento del botón para alternar la visibilidad del sidebar en pantallas pequeñas
     toggler.addEventListener("click", function () {
         if (window.innerWidth < 768) {
-            // Solo en pantallas pequeñas alternamos entre 'collapsed' y 'open'
             sidebar.classList.toggle("collapsed");
             sidebar.classList.toggle("open");
         }
     });
-});
 
-document.addEventListener("DOMContentLoaded", function () {
-    function handleSidebarScroll() {
-        const sidebar = document.getElementById('sidebar'); // Reemplaza 'sidebar' con el ID de tu sidebar
-        if (!sidebar) {
-          console.error('Sidebar element not found. Make sure the ID is correct.');
-          return;
-        }
-      
-        // Define un atributo personalizado para almacenar el estado original del overflow
-        if (!sidebar.dataset.originalOverflowY) {
-          sidebar.dataset.originalOverflowY = window.getComputedStyle(sidebar).overflowY;
-        }
-      
-        const windowHeight = window.innerHeight;
-        const sidebarHeight = sidebar.offsetHeight;
-      
-        if (sidebarHeight > windowHeight) {
-          sidebar.style.overflowY = 'auto';
-        } else {
-          sidebar.style.overflowY = sidebar.dataset.originalOverflowY;
-        }
-      }
-      
-      // Llama a la función cuando se carga la página y cuando cambia el tamaño de la ventana
-      window.addEventListener('load', handleSidebarScroll);
-      window.addEventListener('resize', handleSidebarScroll);
+    // Ejecutar al cargar la página
+    handleSidebarState();
+    handleSidebarScroll(); // Llamarlo también al inicio para asegurar el scroll correcto
 });
-
