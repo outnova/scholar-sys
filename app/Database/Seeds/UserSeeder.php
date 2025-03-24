@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
         ];
 
         // Simple Queries
-        $this->db->query('INSERT INTO users (cedula, username, email, password, active) VALUES(:cedula:, :username:, :email:, :password:, :active:)', $data);
+        //$this->db->query('INSERT INTO users (cedula, username, email, password, active) VALUES(:cedula:, :username:, :email:, :password:, :active:)', $data);
 
         // Using Query Builder
         $this->db->table('users')->insert($data);
