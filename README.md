@@ -49,7 +49,9 @@ database.default.hostname = localhost
 database.default.database = nombre_base_datos
 database.default.username = usuario_bd
 database.default.password = contraseña_bd
-database.default.DBDriver = PostgreSQL  # O MySQL según tu caso
+database.default.DBPrefix =
+database.default.DBDriver = Postgre  # O MySQLi según tu caso
+database.default.port = 5432 # (5432 para Postgre, 3306 en caso de MySQLi)
 ```
 
 ## Paso 4: Ejecutar Migraciones
