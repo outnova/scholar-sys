@@ -1,0 +1,17 @@
+.content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column; /* Asegura que los hijos se organicen en columna */
+    overflow-y: auto;
+    min-height: 0;
+    /* Elimina max-height: 100vh y usa height: 0 para el flex-grow funcione mejor */
+    height: 0; /* Esto permite que flex-grow determine la altura */
+}
+
+/* Asegúrate que el contenedor padre tenga una altura definida */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* o min-height: 100vh */
+    overflow: hidden;
+}
