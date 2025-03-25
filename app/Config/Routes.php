@@ -19,3 +19,5 @@ $routes->get('/home', 'Home::index', ['filter' => 'auth']);
 $routes->get('/admin/settings', 'SettingsController::index', ['filter' => 'auth']);
 $routes->post('/admin/settings/update', 'SettingsController::update', ['filter' => 'auth']);
 $routes->get('/admin/users', 'UsersController::index', ['filter' => 'auth']);
+$routes->get('/admin/users/create', 'UsersController::create', ['filter' => 'auth']);
+$routes->post('/admin/users/store', 'UsersController::store', ['filter' => 'auth']);
