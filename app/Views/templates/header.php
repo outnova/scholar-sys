@@ -18,7 +18,7 @@
                 <ul class="sidebar-nav">
                     <li class="sidebar-item">
                         <a href="<?= site_url('home') ?>" class="sidebar-link">
-                            <i class="fa-solid fa-house pe-2"></i>
+                            <i class="hgi hgi-stroke hgi-home-11 pe-2 fs-5"></i>
                             Menú principal
                         </a>
                     </li>
@@ -28,7 +28,7 @@
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#records"
                             aria-expanded="false" aria-controls="records">
-                            <i class="fa-regular fa-file-lines pe-2"></i>
+                            <i class="hgi hgi-stroke hgi-file-01 pe-2 fs-5"></i>
                             Constancias
                         </a>
                         <ul id="records" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
@@ -109,7 +109,7 @@
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#admin"
                             aria-expanded="false" aria-controls="admin">
-                            <i class="fa-regular fa-user pe-2"></i>
+                            <i class="hgi hgi-stroke hgi-microsoft-admin pe-2 fs-5"></i>
                             Administrar
                         </a>
                         <ul id="admin" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
