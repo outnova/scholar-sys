@@ -127,7 +127,7 @@ li {
 }
 
 .sidebar {
-    background-color: rgba(17, 24, 40, 148);
+    background-color: #1E293B;
     overflow-y: hidden; /* El scroll vertical aparece solo cuando es necesario */
     overflow-x: hidden;
     max-height: 100vh; /* Para limitar la altura del sidebar */
@@ -159,11 +159,16 @@ li {
     padding: 1.5rem 1.5rem .375rem;
 }
 
+sidebar-link i {
+    vertical-align: middle;
+}
+
 a.sidebar-link {
+    display: flex; 
+    align-items: center; /* Centra verticalmente el icono y el texto */
     padding: .625rem 1.625rem;
     color: #e9ecef;
     position: relative;
-    display: block;
     font-size: 1rem;
 }
 
