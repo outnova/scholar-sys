@@ -6,11 +6,14 @@
         <div class="container mt-4">
             <h3 class="mb-4">Configuración del Sistema</h3>
 
+            <?php /*
             <?php if(session()->has('success')): ?>
                 <div class="alert alert-success">
                     <?= session('success') ?>
                 </div>
             <?php endif; ?>
+            */
+            ?>
 
             <form action="<?= base_url('admin/settings/update') ?>" method="post">
                 <?= csrf_field() ?>
@@ -57,7 +60,6 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                <a href="<?= base_url('/') ?>" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>
 <?= $this->endSection() ?>
