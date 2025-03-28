@@ -43,6 +43,24 @@
                     confirmButtonText: 'OK'
                 });
             <?php endif; ?>
+            <?php if(session()->get('tempPassword')): ?>
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Usuario registrado!',
+                    text: 'El usuario ha sido registrado correctamente. La contraseña temporal generada es: ' + ' <?= session()->get('tempPassword') ?>',
+                    showCancelButton: true,
+                    confirmButtonText: 'Copiar',
+                    cancelButtonText: 'Cerrar',
+                    preConfirm: () => {
+                        const password = '<?= session()->get('tempPassword') ?>';
+                        navigator.clipboard.writeText(password).then(() => {
+                            Swal.fire('¡Contraseña copiada!', '', 'success');
+                        }).catch(err => {
+                            Swal.fire('Error al copiar', '', 'error');
+                        });
+                    }
+                });
+            <?php endif; ?>    
         });
     </script>
 
