@@ -35,6 +35,7 @@ class Filters extends BaseFilters
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
         'auth'          => \App\Filters\AuthFilter::class,
+        'password_change' => \App\Filters\CheckPasswordChangeFilter::class,
     ];
 
     /**
@@ -73,6 +74,7 @@ class Filters extends BaseFilters
             // 'honeypot',
             'csrf' => ['except' => 'auth/authenticate'],
             'auth' => ['except' => ['login', 'auth/authenticate', 'register']],
+            'password_change' => ['except' => 'auth/logout'],
             // 'invalidchars',
         ],
         'after' => [
