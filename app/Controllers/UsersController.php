@@ -10,7 +10,7 @@ class UsersController extends BaseController
 {
     public function index()
     {
-        $usersModel = new \App\Models\Users();
+        $usersModel = new Users();
         $users = $usersModel->findAll();
 
         return view('admin/users/index', ['users' => $users]);
@@ -153,5 +153,20 @@ class UsersController extends BaseController
         log_message('error', 'Error en la inserción: ' . json_encode($userModel->errors()));
 
         return redirect()->to('/admin/users/create')->with('tempPassword', $tempPassword);
+    }
+
+    public function newPasswordView()
+    {
+        $userModel = new Users();
+
+        $userId = session()->get('user_id');
+
+        $user = $userModel->select('must_change_password')->where('id', $userId)->first();
+
+        if ($user['must_change_password'] == 'f') {
+            return redirect()->to('home');
+        }
+
+        return view('new-password');
     }
 }
