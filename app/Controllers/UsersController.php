@@ -211,6 +211,6 @@ class UsersController extends BaseController
 
         $userModel->update($userId, $data);
 
-        return redirect()->to('/home')->with('success', 'Contraseña actualizada con éxito');
+        return redirect()->to('/home')->with('passwordUpdated', '¡Contraseña actualizada!');
     }
 }
