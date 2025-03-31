@@ -43,6 +43,15 @@
                     confirmButtonText: 'OK'
                 });
             <?php endif; ?>
+            <?php if(session()->get('passwordUpdated')): ?>
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Éxito!',
+                    text: '<?= session()->get('passwordUpdated') ?>',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                });
+            <?php endif; ?>
             <?php if(session()->get('tempPassword')): ?>
                 Swal.fire({
                     icon: 'success',
