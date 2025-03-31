@@ -169,4 +169,48 @@ class UsersController extends BaseController
 
         return view('new-password');
     }
+
+    public function updateNewPassword()
+    {
+        $userModel = new Users();
+
+        $userId = session()->get('user_id');
+
+        $newPassword = $this->request->getPost('new_password');
+        $confirmPassword = $this->request->getPost('confirm_password');
+
+        $rules = [
+            'new_password' => [
+                'label' => 'Contraseña',
+                'rules' => 'required|min_length[8]|max_length[16]|regex_match[/^(?=.*[A-Z])(?=.*\d)(?=.*[#$.@&])[A-Za-z\d#$.@&]{8,16}$/]',
+                'errors' => [
+                    'required' => 'La {field} es obligatoria.',
+                    'min_length' => 'La {field} debe tener al menos 8 caracteres.',
+                    'max_length' => 'La {field} no puede tener más de 16 caracteres.',
+                    'regex_match' => 'La {field} debe incluir al menos una mayúscula, un número y uno de estos símbolos: # $ . @ &.'
+                ]
+            ],
+            'confirm_password' => [
+                'label' => 'Confirmar contraseña',
+                'rules' => 'required|matches[new_password]',
+                'errors' => [
+                    'required' => 'La {field} es obligatoria.',
+                    'matches' => 'Las contraseñas no coinciden.'
+                ]
+            ]
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errores', $this->validator->getErrors());
+        }
+
+        $data = [
+            'password' => password_hash($this->request->getPost('new_password'), PASSWORD_DEFAULT),
+            'must_change_password' => false,
+        ];
+
+        $userModel->update($userId, $data);
+
+        return redirect()->to('/home')->with('success', 'Contraseña actualizada con éxito');
+    }
 }
