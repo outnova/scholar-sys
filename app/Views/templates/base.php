@@ -65,5 +65,6 @@
     </script>
 
     <script src="<?= base_url('assets/js/sidebar.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/errors.js'); ?>"></script>
 </body>
 </html>
