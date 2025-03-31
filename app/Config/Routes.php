@@ -17,6 +17,7 @@ $routes->get('auth/logout', 'AuthController::logout');
 
 $routes->get('/home', 'Home::index', ['filter' => 'auth']);
 $routes->get('/new-password', 'UsersController::newPasswordView', ['filter' => 'auth']);
+$routes->post('/new-password', 'UsersController::updateNewPassword', ['filter' => 'auth']);
 $routes->get('/admin/settings', 'SettingsController::index', ['filter' => 'auth']);
 $routes->post('/admin/settings/update', 'SettingsController::update', ['filter' => 'auth']);
 $routes->get('/admin/users', 'UsersController::index', ['filter' => 'auth']);
