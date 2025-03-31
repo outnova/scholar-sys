@@ -18,11 +18,14 @@
 </head>
 <body>
     <div class="password-container">
-        <h3 class="text-center mb-3">Cambiar Contraseña</h3>
+        <h3 class="text-center mb-3">Establezca una contraseña</h3>
+        <div class="alert alert-primary" role="alert">
+            <p class="mb-0">Hola <b><?= session('username'); ?></b>, es necesario que establezcas una contraseña para acceder al sistema.</p>
+        </div>
         <form action="/new-password" method="POST">
             <?= csrf_field() ?>
             <div class="mb-3">
-                <label for="new_password" class="form-label">Nueva Contraseña</label>
+                <label for="new_password" class="form-label">Contraseña</label>
                 <div class="input-group">
                     <input type="password" class="form-control" id="new_password" name="new_password" required>
                     <span class="input-group-text eye-icon" id="eye-icon1" onclick="togglePassword('new_password', 'eye-icon1')">
