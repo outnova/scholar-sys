@@ -1,21 +1,5 @@
 <?= $this->extend('templates/base') ?>
 
-<?= $this->section('styles') ?>
-    <style>
-        .status-label {
-            transition: color 0.3s ease;
-        }
-
-        .status-activo {
-            color: #198754 !important; /* verde Bootstrap */
-        }
-
-        .status-inactivo {
-            color: #dc3545 !important; /* rojo Bootstrap */
-        }
-    </style>
-<?= $this->endSection() ?>
-
 <?= $this->section('title') ?>Inicio<?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -118,27 +102,9 @@
                 </select>
                 </div>
 
-                <div class="mb-3">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" 
-                            type="checkbox" 
-                            role="switch" 
-                            id="userActiveSwitch" 
-                            name="active" 
-                            value="1" 
-                            <?= $user['active'] ? 'checked' : '' ?>>
-                        <label class="form-check-label transition fw-bold" 
-                            for="userActiveSwitch" 
-                            id="userStatusLabel">
-                            <?= $user['active'] ? 'Usuario activo' : 'Usuario inactivo' ?>
-                        </label>
-                    </div>
-                </div>
-
                 <button type="submit" class="btn btn-primary">Actualizar</button>
                 <a href="<?= base_url('/admin/users'); ?>" class="btn btn-secondary">Atrás</a>
             </form>
         </div>
     </div>
-    <script src="<?= base_url('assets/js/userActiveSwitch.js'); ?>"></script>
 <?= $this->endSection() ?>
