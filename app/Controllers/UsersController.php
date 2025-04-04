@@ -5,13 +5,19 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\Users;
+use CodeIgniter\Exceptions\PageNotFoundException;
 
 class UsersController extends BaseController
 {
+    protected $userModel;
+
+    public function __construct()
+    {
+        $this->userModel = new Users();
+    }
     public function index()
     {
-        $usersModel = new Users();
-        $users = $usersModel->findAll();
+        $users = $this->userModel->findAll();
 
         return view('admin/users/index', ['users' => $users]);
         //
@@ -22,13 +28,11 @@ class UsersController extends BaseController
     }
     public function store()
     {
-        $userModel = new Users();
-
         $nacionalidad = $this->request->getPost('nacionalidad');
         $cedula = $this->request->getPost('cedula');
         $cedulaCompleta = $nacionalidad . '-' . $cedula;
 
-        $existeCedula = $userModel->where('cedula', $cedulaCompleta)->first();
+        $existeCedula = $this->userModel->where('cedula', $cedulaCompleta)->first();
         $tempPassword = bin2hex(random_bytes(4));
         $hashedPassword = password_hash($tempPassword, PASSWORD_DEFAULT);
 
@@ -148,20 +152,18 @@ class UsersController extends BaseController
             $data['segundo_apellido'] = $this->request->getPost('segundo_apellido');
         }
 
-        $userModel->insert($data);
+        $this->userModel->insert($data);
 
-        log_message('error', 'Error en la inserción: ' . json_encode($userModel->errors()));
+        log_message('error', 'Error en la inserción: ' . json_encode($this->userModel->errors()));
 
         return redirect()->to('/admin/users/create')->with('tempPassword', $tempPassword);
     }
 
     public function newPasswordView()
     {
-        $userModel = new Users();
-
         $userId = session()->get('user_id');
 
-        $user = $userModel->select('must_change_password')->where('id', $userId)->first();
+        $user = $this->userModel->select('must_change_password')->where('id', $userId)->first();
 
         if ($user['must_change_password'] == 'f') {
             return redirect()->to('home');
@@ -172,8 +174,6 @@ class UsersController extends BaseController
 
     public function updateNewPassword()
     {
-        $userModel = new Users();
-
         $userId = session()->get('user_id');
 
         $newPassword = $this->request->getPost('new_password');
@@ -209,8 +209,39 @@ class UsersController extends BaseController
             'must_change_password' => false,
         ];
 
-        $userModel->update($userId, $data);
+        $this->userModel->update($userId, $data);
 
         return redirect()->to('/home')->with('passwordUpdated', '¡Contraseña actualizada!');
+    }
+
+    public function view($id)
+    {
+        $user = $this->userModel->find($id);
+        if(!$user) {
+            throw PageNotFoundException::forPageNotFound("Usuario no encontrado");
+        }
+
+        return view('admin/users/view', ['user' => $user]);
+    }
+
+    public function edit($id)
+    {
+        $user = $this->userModel->find($id);
+        if(!$user) {
+            throw PageNotFoundException::forPageNotFound("Usuario no encontrado");
+        }
+
+        return view('admin/users/edit', ['user' => $user]);
+    }
+
+    public function update($id)
+    {
+        $rules = [
+
+        ];
+
+        $data = [
+
+        ];
     }
 }
