@@ -26,4 +26,5 @@ $routes->post('/admin/users/store', 'UsersController::store', ['filter' => 'auth
 $routes->get('/admin/users/(:num)', 'UsersController::view/$1', ['filter' => 'auth']);
 $routes->get('/admin/users/(:num)/edit', 'UsersController::edit/$1', ['filter' => 'auth']);
 $routes->post('/admin/users/(:num)/update', 'UsersController::update/$1', ['filter' => 'auth']);
+$routes->post('/admin/users/toggle-status/(:num)', 'UsersController::toggleStatus/$1', ['filter' => 'auth']);
 //$routes->put('/admin/users/(:num)', 'UsersController::update/$1', ['filter' => 'auth']);

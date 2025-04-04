@@ -244,4 +244,32 @@ class UsersController extends BaseController
 
         ];
     }
+
+    public function toggleStatus($id)
+    {
+        if(!$this->request->isAJAX()) {
+            return $this->response->setJSON([
+                'sucess' => false,
+                'message' => 'Acceso no permitido'
+            ]);
+        }
+
+        $user = $this->userModel->find($id);
+
+        if(!$user) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Usuario no encontrado'
+            ]);
+        }
+
+        $newStatus = $user['active'] ? 0 : 1;
+
+        $this->userModel->update($id, ['active' => $newStatus]);
+
+        return $this->response->setJSON([
+            'success' => true,
+            'message' => $newStatus ? 'Usuario activado correctamente' : 'Usuario desactivado correctamente' 
+        ]);
+    }
 }
