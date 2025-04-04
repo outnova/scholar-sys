@@ -176,6 +176,7 @@ class AuthController extends ResourceController
             'user_id'   => $user['id'],
             'username'  => $user['username'],
             'email'     => $user['email'],
+            'position'  => $user['position'], //session()->set('position', $newPosition);
             'isLoggedIn'=> true
         ];
 

@@ -11,7 +11,7 @@
                     </div>
                     <div class="col-auto ms-2">
                         <p class="fw-bold mb-0"><?= session('username'); ?></p>
-                        <p class="mb-0">Cargo</p>
+                        <p class="mb-0"><?= session('position'); ?></p>
                     </div>
                 </div>
                 <!-- Sidebar Navigation -->
