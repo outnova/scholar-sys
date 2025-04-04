@@ -32,10 +32,10 @@
                             </td>
                             <td>
                             <div class="item-action d-flex gap-3 fs-5 justify-content-center">
-                                <a href="#" title="Ver usuario">
+                                <a href="<?= base_url('admin/users/' . $user['id']) ?>" title="Ver usuario">
                                     <i class="hgi hgi-stroke hgi-view"></i>
                                 </a>
-                                <a href="#" title="Editar usuario">
+                                <a href="<?= base_url('admin/users/' . $user['id']) . '/edit' ?>" title="Editar usuario">
                                     <i class="hgi hgi-stroke hgi-pencil-edit-02"></i>
                                 </a>
                             </div>
