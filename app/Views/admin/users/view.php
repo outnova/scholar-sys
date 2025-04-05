@@ -30,7 +30,15 @@
                     data-user-id="<?= $user['id'] ?>">
                 <?= $user['active'] ? 'Desactivar usuario' : 'Activar usuario' ?>
             </button>
-            </div>
+        </div>
+        <div class="mb-3">
+            <p>Reestablecer la contraseña del usuario:</p>
+            <button class="btn btn-secondary" 
+                id="resetUserPassBtn"
+                data-user-id="<?= $user['id'] ?>">
+                Reestablecer contraseña
+            </button>
+        </div>
         <div>
             <a href="<?= base_url('admin/users'); ?>" class="btn btn-primary">Volver</a>
         </div> 
@@ -42,53 +50,113 @@
         </script>
         <script>
             document.getElementById('toggleUserStatusBtn').addEventListener('click', function () {
-            const userId = this.dataset.userId;
-            const isActive = this.classList.contains('btn-danger'); // si es rojo, está activo
+                const userId = this.dataset.userId;
+                const isActive = this.classList.contains('btn-danger'); // si es rojo, está activo
 
-            Swal.fire({
-                title: isActive ? '¿Desactivar usuario?' : '¿Activar usuario?',
-                text: isActive 
-                    ? 'El usuario no podrá acceder al sistema hasta ser reactivado.' 
-                    : 'El usuario podrá acceder nuevamente al sistema.',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: isActive ? 'Sí, desactivar' : 'Sí, activar',
-                cancelButtonText: 'Cancelar',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    fetch(`/admin/users/toggle-status/${userId}`, {
-                        method: 'POST',
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest', // para diferenciar si es AJAX
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            [csrfTokenName]: csrfTokenValue
+                Swal.fire({
+                    title: isActive ? '¿Desactivar usuario?' : '¿Activar usuario?',
+                    text: isActive 
+                        ? 'El usuario no podrá acceder al sistema hasta ser reactivado.' 
+                        : 'El usuario podrá acceder nuevamente al sistema.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: isActive ? 'Sí, desactivar' : 'Sí, activar',
+                    cancelButtonText: 'Cancelar',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch(`/admin/users/toggle-status/${userId}`, {
+                            method: 'POST',
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest', // para diferenciar si es AJAX
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                [csrfTokenName]: csrfTokenValue
+                            })
                         })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            Swal.fire({
-                                title: '¡Listo!',
-                                text: data.message,
-                                icon: 'success',
-                                timer: 2000,
-                                showConfirmButton: false
-                            }).then(() => {
-                                location.reload(); // recarga para reflejar el nuevo estado
-                            });
-                        } else {
-                            Swal.fire('Error', data.message, 'error');
-                        }
-                    })
-                    .catch(() => {
-                        Swal.fire('Error', 'Algo salió mal al cambiar el estado.', 'error');
-                    });
-                }
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire({
+                                    title: '¡Listo!',
+                                    text: data.message,
+                                    icon: 'success',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                }).then(() => {
+                                    location.reload(); // recarga para reflejar el nuevo estado
+                                });
+                            } else {
+                                Swal.fire('Error', data.message, 'error');
+                            }
+                        })
+                        .catch(() => {
+                            Swal.fire('Error', 'Algo salió mal al cambiar el estado.', 'error');
+                        });
+                    }
+                });
             });
-        });
-    </script>
+
+            document.getElementById('resetUserPassBtn').addEventListener('click', function () {
+                const userId = this.dataset.userId;
+
+                Swal.fire({
+                    title: '¿Reestablecer usuario?',
+                    text: 'Se le establecerá una contraseña temporal al usuario que podrá cambiar más adelante',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, reestablecer',
+                    cancelButtonText: 'Cancelar',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch(`/admin/users/reset-password/${userId}`, {
+                            method: 'POST',
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest', // para diferenciar si es AJAX
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                [csrfTokenName]: csrfTokenValue
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: '¡Listo!',
+                                    text: data.message,
+                                    showCancelButton: true,
+                                    confirmButtonText: 'Copiar',
+                                    cancelButtonText: 'Cerrar',
+                                    allowOutsideClick: false, 
+                                    allowEscapeKey: false,   
+                                    preConfirm: () => {
+                                        return navigator.clipboard.writeText(data.tempPassword)
+                                        .then(() => {
+                                            Swal.fire('¡Contraseña copiada!', '', 'success');
+                                        })
+                                        .catch(err => {
+                                            Swal.fire('Error al copiar', '', 'error');
+                                        });
+                                    }
+                                }).then(() => {
+                                    setTimeout(() => {
+                                        location.reload();
+                                    }, 2000);
+                                });
+                            } else {
+                                Swal.fire('Error', data.message, 'error');
+                            }
+                        })
+                        .catch(() => {
+                            Swal.fire('Error', 'Algo salió mal al cambiar el estado.', 'error');
+                        });
+                    }
+                });
+            });
+        </script>
     <?= $this->endSection() ?>
 <?= $this->endSection() ?>

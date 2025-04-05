@@ -154,7 +154,7 @@ class UsersController extends BaseController
 
         $this->userModel->insert($data);
 
-        log_message('error', 'Error en la inserción: ' . json_encode($this->userModel->errors()));
+        //log_message('error', 'Error en la inserción: ' . json_encode($this->userModel->errors()));
 
         return redirect()->to('/admin/users/create')->with('tempPassword', $tempPassword);
     }
@@ -270,6 +270,41 @@ class UsersController extends BaseController
         return $this->response->setJSON([
             'success' => true,
             'message' => $newStatus ? 'Usuario activado correctamente' : 'Usuario desactivado correctamente' 
+        ]);
+    }
+
+    public function resetPassword($id)
+    {
+        if(!$this->request->isAJAX()) {
+            return $this->response->setJSON([
+                'sucess' => false,
+                'message' => 'Acceso no permitido'
+            ]);
+        }
+
+        $user = $this->userModel->find($id);
+
+        if(!$user) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Usuario no encontrado'
+            ]);
+        }
+
+        $tempPassword = bin2hex(random_bytes(4));
+        $hashedPassword = password_hash($tempPassword, PASSWORD_DEFAULT);
+
+        $data = [
+            'must_change_password' => true,
+            'password' => $hashedPassword,
+        ];
+
+        $this->userModel->update($id, $data);
+
+        return $this->response->setJSON([
+            'success' => true,
+            'message' => 'Usuario reestablecido con éxito. La contraseña temporal generada es: ' . esc($tempPassword),
+            'tempPassword' => $tempPassword
         ]);
     }
 }
