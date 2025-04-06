@@ -236,13 +236,143 @@ class UsersController extends BaseController
 
     public function update($id)
     {
-        $rules = [
+        $user = $this->userModel->find($id);
+        if(!$user) {
+            throw PageNotFoundException::forPageNotFound("Usuario no encontrado");
+        }
 
+        $nacionalidad = $this->request->getPost('nacionalidad');
+        $cedula = $this->request->getPost('cedula');
+        $cedulaCompleta = $nacionalidad . '-' . $cedula;
+
+        $rules = [
+            'cedula' => [
+                'label' => 'Cédula',
+                'rules' => 'required|regex_match[/^[0-9]{6,9}$/]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                    'regex_match' => 'La {field} debe contener entre 6 y 9 dígitos numéricos.',
+                ]
+            ],
+            'username' => [
+                'label' => 'Usuario',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'El {field} es obligatorio.',
+                ]
+            ],
+            'email' => [
+                'label' => 'Correo Electrónico',
+                'rules' => 'required|valid_email',
+                'errors' => [
+                    'required' => 'El {field} es obligatorio.',
+                    'valid_email' => 'El {field} no tiene un formato válido.',
+                ]
+            ],
+            'primer_nombre' => [
+                'label' => 'Primer Nombre',
+                'rules' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/]',  // Permite letras, acentos y tildes
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                    'regex_match' => 'El {field} solo puede contener letras y espacios.'
+                ]
+            ],
+            'segundo_nombre' => [
+                'label' => 'Segundo Nombre',
+                'rules' => 'regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/]',  // Permite letras, acentos y tildes
+                'errors' => [
+                    'regex_match' => 'El {field} solo puede contener letras y espacios.'
+                ]
+            ],
+            'primer_apellido' => [
+                'label' => 'Primer Apellido',
+                'rules' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/]',  // Permite letras, acentos y tildes
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                    'regex_match' => 'El {field} solo puede contener letras y espacios.'
+                ]
+            ],
+            'segundo_apellido' => [
+                'label' => 'Segundo Apellido',
+                'rules' => 'regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]*$/]',  // Permite letras, acentos y tildes
+                'errors' => [
+                    'regex_match' => 'El {field} solo puede contener letras y espacios.'
+                ]
+            ],
+            'cargo' => [
+                'label' => 'Cargo',
+                'rules' => 'required|in_list[directivo,subdirectivo,coordinador,administrativo]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                    'in_list' => 'El {field} debe ser uno de los siguientes valores: Directivo, Subdirectivo, Coordinador, Administrativo.'
+                ]
+            ],
+            'turno' => [
+                'label' => 'Turno',
+                'rules' => 'required|in_list[mañana,tarde]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                    'in_list' => 'El {field} debe ser "Mañana" o "Tarde".'
+                ]
+            ],
         ];
+
+        if (!$this->validate($rules)) {
+            $errores = $this->validator->getErrors();
+        } else {
+            $errores = [];
+        }
+        
+        // Verificación manual de duplicados
+        if ($user['cedula'] !== $cedulaCompleta) {
+            $existeCedula = $this->userModel->where('cedula', $cedulaCompleta)->first();
+            if ($existeCedula) {
+                $errores['cedula'] = 'La cédula ya está registrada en el sistema.';
+            }
+        }
+        
+        if ($user['username'] !== $this->request->getPost('username')) {
+            $existeUsername = $this->userModel->where('username', $this->request->getPost('username'))->first();
+            if ($existeUsername) {
+                $errores['username'] = 'El nombre de usuario ya está registrado.';
+            }
+        }
+        
+        if ($user['email'] !== $this->request->getPost('email')) {
+            $existeEmail = $this->userModel->where('email', $this->request->getPost('email'))->first();
+            if ($existeEmail) {
+                $errores['email'] = 'El correo electrónico ya está registrado.';
+            }
+        }
+        
+        // Si hay errores, los mostramos todos juntos
+        if (!empty($errores)) {
+            return redirect()->back()->withInput()->with('errores', $errores);
+        }
 
         $data = [
-
+            'cedula' => $cedulaCompleta,
+            'username' => $this->request->getPost('username'),
+            'email' => $this->request->getPost('email'),
+            'primer_nombre' => $this->request->getPost('primer_nombre'),
+            'primer_apellido' => $this->request->getPost('primer_apellido'),
+            'position' => ucwords(strtolower($this->request->getPost('cargo'))),
+            'turn' => ucwords(strtolower($this->request->getPost('turno')))
         ];
+
+        // Solo agregar segundo_nombre si no está vacío o nulo
+        if (!empty($this->request->getPost('segundo_nombre'))) {
+            $data['segundo_nombre'] = $this->request->getPost('segundo_nombre');
+        }
+
+        // Solo agregar segundo_apellido si no está vacío o nulo
+        if (!empty($this->request->getPost('segundo_apellido'))) {
+            $data['segundo_apellido'] = $this->request->getPost('segundo_apellido');
+        }
+
+        $this->userModel->update($id, $data);
+
+        return redirect()->to('admin/users/' . $id . '/edit')->with('userUpdated', '¡Usuario actulizado con éxito!');
     }
 
     public function toggleStatus($id)
