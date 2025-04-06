@@ -24,7 +24,7 @@
                 </div>
             <?php endif; ?>
 
-            <form action="<?= base_url('admin/users/update/' . $user['id']); ?>" method="post">
+            <form action="<?= base_url('admin/users/' . $user['id'] . '/update'); ?>" method="post">
                 <?= csrf_field() ?>
 
                 <div class="row g-2">
@@ -107,4 +107,5 @@
             </form>
         </div>
     </div>
+    <script src="<?= base_url('assets/js/userFieldsValidations.js'); ?>"></script>
 <?= $this->endSection() ?>
