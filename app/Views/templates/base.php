@@ -35,6 +35,8 @@
     <?php // <?= $this->include('templates/footer'); ?>
 
     <script>
+        <?php 
+        /*
         document.addEventListener("DOMContentLoaded", function() {
             <?php if(session()->has('success') && current_url() !== base_url('/home')): ?>
                 Swal.fire({
@@ -71,10 +73,32 @@
                         });
                     }
                 });
-            <?php endif; ?>    
+            <?php endif; ?> 
+            <?php if(session()->get('userUpdated')): ?>
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Éxito!',
+                    text: '<?= session()->get('userUpdated') ?>',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    location.reload(); // Refresca la página al cerrar el alert
+                });
+            <?php endif; ?> 
         });
+        */
+        ?> 
     </script>
-
+    <script>
+        const flashMessages = <?= json_encode([
+            'success' => session()->get('success'),
+            'passwordUpdated' => session()->get('passwordUpdated'),
+            'tempPassword' => session()->get('tempPassword'),
+            'userUpdated' => session()->get('userUpdated'),
+            'homeUrl' => base_url('/home')
+        ]) ?>;
+    </script>
+    <script src="<?= base_url('assets/js/flashMessages.js') ?>"></script>
     <script src="<?= base_url('assets/js/sidebar.js'); ?>"></script>
     <script src="<?= base_url('assets/js/errors.js'); ?>"></script>
     <!-- Sección para scripts personalizados -->
