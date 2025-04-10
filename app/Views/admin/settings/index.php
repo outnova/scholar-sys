@@ -15,6 +15,17 @@
             */
             ?>
 
+            <?php if (session()->has('errores')): ?>
+                <div class="alert alert-danger">
+                    <p>Corrige los siguientes errores:</p>
+                    <ul>
+                        <?php foreach (session('errores') as $error): ?>
+                            <li><?= esc($error) ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+
             <form action="<?= base_url('admin/settings/update') ?>" method="post">
                 <?= csrf_field() ?>
 
@@ -32,7 +43,7 @@
 
                 <div class="mb-3">
                     <label for="school_address" class="form-label">Dirección</label>
-                    <textarea class="form-control" id="school_address" name="school_address" rows="3"><?= esc($settings['school_address']) ?></textarea>
+                    <textarea class="form-control" id="school_address" name="school_address" rows="3" required><?= esc($settings['school_address']) ?></textarea>
                 </div>
 
                 <div class="mb-3">
@@ -54,12 +65,30 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="principal_ci" class="form-label">Cédula del Director</label>
-                    <input type="text" class="form-control" id="principal_ci" name="principal_ci" 
-                        value="<?= esc($settings['principal_ci']) ?>" required>
+                    <div class="row g-2">
+                        <div class="col-sm-2">
+                            <label for="principal_nacionalidad" class="form-label">Nacionalidad</label>
+                            <select class="form-select" aria-label="Default select example" id="principal_nacionalidad" name="principal_nacionalidad">
+                                <!--<option selected>Open this select menu</option>-->
+                                <option value="V">V</option>
+                                <option value="E">E</option>
+                                <option value="P">P</option>
+                            </select>
+                        </div>
+                        <div class="col-sm">
+                            <div class="mb-3">
+                                <label for="principal_ci" class="form-label">Cédula</label>
+                                <?php $ciLimpia = preg_replace('/[^0-9]/', '', $settings['principal_ci']); ?>
+                                <input type="text" class="form-control" id="principal_ci" name="principal_ci" 
+                                value="<?= esc($ciLimpia) ?>" required>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                <button type="submit" class="btn btn-primary" disabled>Guardar Cambios</button>
             </form>
         </div>
+        <script src="<?= base_url('assets/js/settingsValidations.js'); ?>"></script>
+        <script src="<?= base_url('assets/js/checkSettingsChanges.js'); ?>"></script>
 <?= $this->endSection() ?>

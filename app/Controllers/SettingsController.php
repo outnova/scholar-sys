@@ -29,6 +29,78 @@ class SettingsController extends BaseController
     {
         $settingsModel = new Settings();
 
+        $nacionalidad = $this->request->getPost('principal_nacionalidad');
+        $cedula = $this->request->getPost('principal_ci');
+        
+        // Elimina cualquier punto o guión por si acaso vienen del input
+        $cedulaLimpia = preg_replace('/[^0-9]/', '', $cedula);
+        
+        // Formatea la cédula con puntos (ej: 12345678 → 12.345.678)
+        $cedulaFormateada = number_format($cedulaLimpia, 0, '', '.');
+        
+        // Combina con la nacionalidad
+        $cedulaCompleta = $nacionalidad . '-' . $cedulaFormateada;
+
+        $rules = [
+            'system_name' => [
+                'label' => 'Nombre del Sistema',
+                'rules' => 'required|regex_match[/^[a-zA-Z\s]{1,16}$/]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                    'regex_match' => 'El {field} solo puede contener letras sin acentos, espacios y un máximo de 16 caracteres.'
+                ]
+            ],
+            'school_name' => [
+                'label' => 'Nombre de la Escuela',
+                'rules' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜ.\sñÑ"]{1,64}$/]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                    'regex_match' => 'El {field} solo puede contener letras, espacios, puntos, comillas y un máximo de 64 caracteres.'
+                ]
+            ],
+            'school_address' => [
+                'label' => 'Dirección',
+                'rules' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜ0-9\s.,;ºñÑ]{1,200}$/]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                    'regex_match' => 'El {field} solo puede contener letras, números, espacios, puntos, comas, punto y coma, º y un máximo de 200 caracteres.'
+                ]
+            ],
+            'school_phone' => [
+                'label' => 'Teléfono',
+                'rules' => 'required|regex_match[/^[0-9]{10,13}$/]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                    'regex_match' => 'La {field} debe contener entre 10 y 13 dígitos numéricos.',
+                ]
+
+            ],
+            'school_email' => [
+                'label' => 'Correo Electrónico',
+                'rules' => 'required|valid_email',
+                'errors' => [
+                    'required' => 'El {field} es obligatorio.',
+                    'valid_email' => 'El {field} no tiene un formato válido.',
+                ]
+            ],
+            'principal_name' => [
+                'label' => 'Nombre del Director',
+                'rules' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜ.\sñÑ]{1,64}$/]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                    'regex_match' => 'El {field} solo puede contener letras, espacios, puntos y un máximo de 64 caracteres.'
+                ]
+            ],
+            'principal_ci' => [
+                'label' => 'Cédula del Director',
+                'rules' => 'required|regex_match[/^[0-9]{6,9}$/]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                    'regex_match' => 'La {field} debe contener entre 6 y 9 dígitos numéricos.',
+                ]
+            ]
+        ];
+
         $data = [
             'system_name' => $this->request->getPost('system_name'),
             'school_name' => $this->request->getPost('school_name'),
@@ -36,8 +108,12 @@ class SettingsController extends BaseController
             'school_phone' => $this->request->getPost('school_phone'),
             'school_email' => $this->request->getPost('school_email'),
             'principal_name' => $this->request->getPost('principal_name'),
-            'principal_ci' => $this->request->getPost('principal_ci'),
+            'principal_ci' => $cedulaCompleta,
         ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errores', $this->validator->getErrors());
+        }
 
         foreach($data as $key => $value) {
             $settingsModel->setSetting($key, $value);
