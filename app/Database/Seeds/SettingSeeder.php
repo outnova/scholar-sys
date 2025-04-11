@@ -8,6 +8,8 @@ class SettingSeeder extends Seeder
 {
     public function run()
     {
+        $this->db->table('settings')->truncate();
+
         $data = [
             [
                 'key' => 'system_name', 
@@ -36,6 +38,14 @@ class SettingSeeder extends Seeder
             [
                 'key' => 'principal_ci', 
                 'value' => '12345678',
+            ],
+            [
+                'key' => 'dea_code', 
+                'value' => 'ABC12345678',
+            ],
+            [
+                'key' => 'depend_code', 
+                'value' => '00123456789',
             ],
         ];
 
