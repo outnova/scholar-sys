@@ -19,6 +19,8 @@ class SettingsController extends BaseController
             'school_email' => $settingsModel->getSetting('school_email'),
             'principal_name' => $settingsModel->getSetting('principal_name'),
             'principal_ci' => $settingsModel->getSetting('principal_ci'),
+            'dea_code' => $settingsModel->getSetting('dea_code'),
+            'depend_code' => $settingsModel->getSetting('depend_code'),
         ];
 
         return view ('admin/settings/index', $data);
@@ -56,6 +58,22 @@ class SettingsController extends BaseController
                 'errors' => [
                     'required' => 'El campo {field} es obligatorio.',
                     'regex_match' => 'El {field} solo puede contener letras, espacios, puntos, comillas y un máximo de 64 caracteres.'
+                ]
+            ],
+            'dea_code' => [
+                'label' => 'Código DEA',
+                'rules' => 'required|regex_match[/^[A-Z0-9]{9,15}$/]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                    'regex_match' => 'El {field} debe contener entre 9 y 15 caracteres alfanuméricos (solo mayúsculas y números).',
+                ]
+            ],
+            'depend_code' => [
+                'label' => 'Código de Dependencia',
+                'rules' => 'required|regex_match[/^[0-9]{9,15}$/]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                    'regex_match' => 'La {field} debe contener entre 9 y 15 dígitos numéricos.',
                 ]
             ],
             'school_address' => [
@@ -104,6 +122,8 @@ class SettingsController extends BaseController
         $data = [
             'system_name' => $this->request->getPost('system_name'),
             'school_name' => $this->request->getPost('school_name'),
+            'dea_code' => $this->request->getPost('dea_code'),
+            'depend_code' => $this->request->getPost('depend_code'),
             'school_address' => $this->request->getPost('school_address'),
             'school_phone' => $this->request->getPost('school_phone'),
             'school_email' => $this->request->getPost('school_email'),

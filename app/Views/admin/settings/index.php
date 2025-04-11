@@ -42,6 +42,18 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="dea_code" class="form-label">Código DEA</label>
+                    <input type="text" class="form-control" id="dea_code" name="dea_code" 
+                        value="<?= esc($settings['dea_code']) ?>" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="depend_code" class="form-label">Código de Dependencia</label>
+                    <input type="text" class="form-control" id="depend_code" name="depend_code" 
+                        value="<?= esc($settings['depend_code']) ?>" required>
+                </div>
+
+                <div class="mb-3">
                     <label for="school_address" class="form-label">Dirección</label>
                     <textarea class="form-control" id="school_address" name="school_address" rows="3" required><?= esc($settings['school_address']) ?></textarea>
                 </div>
