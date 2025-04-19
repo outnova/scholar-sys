@@ -23,8 +23,16 @@ document.addEventListener("DOMContentLoaded", function () {
             showAlert('success', '¡Éxito!', flashMessages.passwordUpdated);
         }
 
+        if (flashMessages.employeeCreated) {
+            showAlert('success', '¡Éxito!', flashMessages.employeeCreated);
+        }
+
         if (flashMessages.userUpdated) {
             showAlert('success', '¡Éxito!', flashMessages.userUpdated, { thenReload: true });
+        }
+
+        if (flashMessages.employeeUpdated) {
+            showAlert('success', '¡Éxito!', flashMessages.employeeUpdated);
         }
 
         if (flashMessages.tempPassword) {

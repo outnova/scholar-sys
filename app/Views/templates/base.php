@@ -93,8 +93,10 @@
         const flashMessages = <?= json_encode([
             'success' => session()->get('success'),
             'passwordUpdated' => session()->get('passwordUpdated'),
+            'employeeCreated' => session()->get('employeeCreated'),
             'tempPassword' => session()->get('tempPassword'),
             'userUpdated' => session()->get('userUpdated'),
+            'employeeUpdated' => session()->get('employeeUpdated'),
             'homeUrl' => base_url('/home')
         ]) ?>;
     </script>
