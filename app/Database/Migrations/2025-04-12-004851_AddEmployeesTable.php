@@ -46,13 +46,19 @@ class AddEmployeesTable extends Migration
             'nivel' => [
                 'type' => 'VARCHAR',
                 'constraint' => 30,
-                'default' => 'Educación Primaria',
+                'default' => 'Primaria',
                 'null' => false,
             ],
             'position' => [
                 'type' => 'VARCHAR',
                 'contraint' => 20,
                 'default' => 'Administrativo',
+                'null' => false,
+            ],
+            'turn' => [
+                'type' => 'VARCHAR',
+                'contraint' => 10,
+                'default' => 'Mañana',
                 'null' => false,
             ],
             'active' => [
