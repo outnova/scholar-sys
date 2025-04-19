@@ -119,6 +119,9 @@
                             <li class="sidebar-item">
                                 <a href="<?= site_url('admin/users') ?>" class="sidebar-link">Usuarios</a>
                             </li>
+                            <li class="sidebar-item">
+                                <a href="<?= site_url('admin/employees') ?>" class="sidebar-link">Trabajadores</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="sidebar-header">
