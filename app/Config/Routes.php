@@ -35,4 +35,6 @@ $routes->get('/admin/employees/(:num)/edit', 'EmployeesController::edit/$1', ['f
 $routes->post('/admin/employees/(:num)/update', 'EmployeesController::update/$1', ['filter' => 'auth']);
 $routes->get('/admin/employees/(:num)', 'EmployeesController::view/$1', ['filter' => 'auth']);
 $routes->post('/admin/employees/toggle-status/(:num)', 'EmployeesController::toggleStatus/$1', ['filter' => 'auth']);
+$routes->get('/records', 'RecordsController::index', ['filter' => 'auth']);
+$routes->get('/records/create', 'RecordsController::create', ['filter' => 'auth']);
 //$routes->put('/admin/users/(:num)', 'UsersController::update/$1', ['filter' => 'auth']);
