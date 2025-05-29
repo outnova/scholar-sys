@@ -26,25 +26,10 @@
                         Módulos
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#records"
-                            aria-expanded="false" aria-controls="records">
+                        <a href="<?= site_url('records') ?>" class="sidebar-link">
                             <i class="hgi hgi-stroke hgi-file-01 pe-2 fs-5"></i>
                             Constancias
                         </a>
-                        <ul id="records" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">Emitir</a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">Consultar</a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">Modificar</a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">Eliminar</a>
-                            </li>
-                        </ul>
                     </li>
                     <li class="sidebar-header">
                         Tools & Components
