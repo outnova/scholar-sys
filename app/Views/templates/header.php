@@ -7,7 +7,7 @@
                 </div>
                 <div class="row g-2 sidebar-info">
                     <div class="col-auto">
-                        <img src="https://picsum.photos/200" alt="Avatar" class="avatar">
+                        <img src="https://placehold.co/200" alt="Avatar" class="avatar">
                     </div>
                     <div class="col-auto ms-2">
                         <p class="fw-bold mb-0"><?= session('username'); ?></p>
@@ -152,7 +152,7 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="avatar-nav" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://picsum.photos/200" class="avatar-nav"/>
+                            <img src="https://placehold.co/200" class="avatar-nav"/>
                             <!--<span class="avatar-badge border bg-red-300 p-1"></span>-->
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">

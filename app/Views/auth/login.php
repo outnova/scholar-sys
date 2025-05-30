@@ -46,7 +46,7 @@
             <!-- Sección izquierda (70%) -->
             <div class="col-md-7 d-none d-md-flex left-container">
                 <div>
-                    <img src="https://picsum.photos/200" alt="Logo">
+                    <img src="https://placehold.co/200" alt="Logo">
                     <h2>Bienvenido a la plataforma</h2>
                     <p>Inicia sesión para continuar</p>
                 </div>
