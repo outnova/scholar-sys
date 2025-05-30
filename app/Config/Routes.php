@@ -37,4 +37,5 @@ $routes->get('/admin/employees/(:num)', 'EmployeesController::view/$1', ['filter
 $routes->post('/admin/employees/toggle-status/(:num)', 'EmployeesController::toggleStatus/$1', ['filter' => 'auth']);
 $routes->get('/records', 'RecordsController::index', ['filter' => 'auth']);
 $routes->get('/records/create', 'RecordsController::create', ['filter' => 'auth']);
+$routes->get('records/create/(:segment)', 'RecordsController::createWithType/$1', ['filter' => 'auth']);
 //$routes->put('/admin/users/(:num)', 'UsersController::update/$1', ['filter' => 'auth']);
