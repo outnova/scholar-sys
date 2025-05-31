@@ -38,4 +38,8 @@ $routes->post('/admin/employees/toggle-status/(:num)', 'EmployeesController::tog
 $routes->get('/records', 'RecordsController::index', ['filter' => 'auth']);
 $routes->get('/records/create', 'RecordsController::create', ['filter' => 'auth']);
 $routes->get('records/create/(:segment)', 'RecordsController::createWithType/$1', ['filter' => 'auth']);
+$routes->post('records/create/(:segment)', 'RecordsController::createWithType/$1', ['filter' => 'auth']);
+$routes->get('records/preview/view', 'RecordsController::previewView');
+$routes->post('records/preview', 'RecordsController::preview');
+$routes->post('records/store', 'RecordsController::store');
 //$routes->put('/admin/users/(:num)', 'UsersController::update/$1', ['filter' => 'auth']);
