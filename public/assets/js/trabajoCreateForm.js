@@ -40,3 +40,33 @@ $(document).ready(function () {
         $('#employeeDataContainer').removeClass('d-none');
     });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form');
+    const dataContainer = document.getElementById('employeeDataContainer');
+
+    form.addEventListener('reset', function () {
+        // Ocultar el contenedor de datos del empleado
+        dataContainer.classList.add('d-none');
+
+        // Limpiar los campos manualmente (si hace falta)
+        const fieldsToClear = [
+            'cargoFunciones',
+            'codigoCargo',
+            'dependencia',
+            'codigoDependencia',
+            'sueldoMensual'
+        ];
+
+        fieldsToClear.forEach(id => {
+            const field = document.getElementById(id);
+            if (field) field.value = '';
+        });
+
+        // También podrías resetear Select2 si lo deseas
+        $('#employee_id').val(null).trigger('change');
+
+        // Deshabilitar el botón "Siguiente"
+        document.getElementById('nextStep').setAttribute('disabled', 'disabled');
+    });
+});
