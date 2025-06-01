@@ -5,7 +5,10 @@
 <div class="container mt-4">
     <h3>Vista previa de la constancia</h3>
 
-    <p><strong>Nombre completo:</strong> <?= esc($data['nombre_completo']) ?></p>
+    <p><strong>Primer nombre:</strong> <?= esc($data['primer_nombre']) ?></p>
+    <p><strong>Segundo nombre:</strong> <?= esc($data['segundo_nombre']) ?></p>
+    <p><strong>Primer apellido:</strong> <?= esc($data['primer_apellido']) ?></p>
+    <p><strong>Segundo apellido:</strong> <?= esc($data['segundo_apellido']) ?></p>
     <p><strong>Cédula:</strong> <?= esc($data['cedula']) ?></p>
     <p><strong>Fecha de ingreso:</strong> <?= esc($data['fecha_ingreso']) ?></p>
     <p><strong>Nivel:</strong> <?= esc($data['nivel']) ?></p>
@@ -15,7 +18,7 @@
     <p><strong>Código dependencia:</strong> <?= esc($data['codigo_dependencia']) ?></p>
     <p><strong>Sueldo mensual:</strong> <?= esc($data['sueldo_mensual']) ?></p>
 
-    <form method="post" action="<?= site_url('records/store') ?>" class="mb-2">
+    <form id="form-store" method="post" action="<?= site_url('records/store') ?>" class="mb-2">
         <?= csrf_field(); ?>
         <?php foreach ($data as $key => $value): ?>
             <input type="hidden" name="<?= esc($key) ?>" value="<?= esc($value) ?>">
@@ -39,6 +42,6 @@
     </form>
     */ 
     ?>
-</div>
+    <script src="<?= base_url('assets/js/recordCreateConfirmation.js'); ?>"></script>
 
 <?= $this->endSection() ?>
