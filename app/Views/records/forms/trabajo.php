@@ -46,18 +46,44 @@
             <button type="button" class="btn btn-primary" id="nextStep" disabled>Consultar datos</button>
 
             <div id="employeeDataContainer" class="mt-4 <?= !empty($formData) ? '' : 'd-none' ?>">
-                <h5>Datos del empleado</h5>
+                <h4>Datos del empleado</h4>
 
                 <div class="mb-3">
-                    <label class="form-label">Nombre completo:</label>
-                    <input type="text" id="nombreCompleto" class="form-control" disabled
-                        value="<?= esc($formData['nombre_completo'] ?? '') ?>">
-                    <input type="hidden" name="nombre_completo" id="nombreCompletoHidden"
-                        value="<?= esc($formData['nombre_completo'] ?? '') ?>">
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label fw-bold">Primer nombre:</label>
+                            <input type="text" id="primerNombre" class="form-control" disabled
+                                value="<?= esc($formData['primer_nombre'] ?? '') ?>">
+                            <input type="hidden" name="primer_nombre" id="primerNombreHidden"
+                                value="<?= esc($formData['primer_nombre'] ?? '') ?>">
+                        </div>
+                        <div class="col">
+                            <label class="form-label fw-bold">Segundo nombre:</label>
+                            <input type="text" id="segundoNombre" class="form-control" disabled
+                                value="<?= esc($formData['segundo_nombre'] ?? '') ?>">
+                            <input type="hidden" name="segundo_nombre" id="segundoNombreHidden"
+                                value="<?= esc($formData['segundo_nombre'] ?? '') ?>">
+                        </div>
+                        <div class="col">
+                            <label class="form-label fw-bold">Primer apellido:</label>
+                            <input type="text" id="primerApellido" class="form-control" disabled
+                                value="<?= esc($formData['primer_apellido'] ?? '') ?>">
+                            <input type="hidden" name="primer_apellido" id="primerApellidoHidden"
+                                value="<?= esc($formData['primer_apellido'] ?? '') ?>">
+                        </div>
+                        <div class="col">
+                            <label class="form-label fw-bold">Segundo apellido:</label>
+                            <input type="text" id="segundoApellido" class="form-control" disabled
+                                value="<?= esc($formData['segundo_apellido'] ?? '') ?>">
+                            <input type="hidden" name="segundo_apellido" id="segundoApellidoHidden"
+                                value="<?= esc($formData['segundo_apellido'] ?? '') ?>">
+                        </div>
+                            
+                    </div>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Cédula:</label>
+                    <label class="form-label fw-bold">Cédula:</label>
                     <input type="text" id="employeeCedula" class="form-control" disabled
                         value="<?= esc($formData['cedula'] ?? '') ?>">
                     <input type="hidden" name="cedula" id="employeeCedulaHidden"
@@ -65,7 +91,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Fecha de ingreso:</label>
+                    <label class="form-label fw-bold">Fecha de ingreso:</label>
                     <input type="text" id="fechaIngreso" class="form-control" disabled
                         value="<?= esc($formData['fecha_ingreso'] ?? '') ?>">
                     <input type="hidden" name="fecha_ingreso" id="fechaIngresoHidden"
@@ -73,7 +99,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Nivel:</label>
+                    <label class="form-label fw-bold">Nivel:</label>
                     <input type="text" id="employeeNivel" class="form-control" disabled
                         value="<?= esc($formData['nivel'] ?? '') ?>">
                     <input type="hidden" name="nivel" id="employeeNivelHidden"
@@ -81,35 +107,35 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Cargo/Funciones:</label>
+                    <label class="form-label fw-bold">Cargo/Funciones:</label>
                     <input type="text" class="form-control" name="cargo_funciones" id="cargoFunciones"
                         placeholder="Cargo o funciones del empleado"
                         value="<?= esc($formData['cargo_funciones'] ?? '') ?>">
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Código del cargo:</label>
+                    <label class="form-label fw-bold">Código del cargo:</label>
                     <input type="text" class="form-control" name="codigo_cargo" id="codigoCargo"
                         placeholder="Código del cargo del empleado"
                         value="<?= esc($formData['codigo_cargo'] ?? '') ?>">
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Dependencia:</label>
+                    <label class="form-label fw-bold">Dependencia:</label>
                     <input type="text" class="form-control" name="dependencia" id="dependencia"
                         placeholder="Dependencia del empleado"
                         value="<?= esc($formData['dependencia'] ?? '') ?>">
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Código de la dependencia:</label>
+                    <label class="form-label fw-bold">Código de la dependencia:</label>
                     <input type="text" class="form-control" name="codigo_dependencia" id="codigoDependencia"
                         placeholder="Código de la dependencia del empleado"
                         value="<?= esc($formData['codigo_dependencia'] ?? '') ?>">
                 </div>
                 
                 <div class="mb-3">
-                    <label class="form-label">Sueldo mensual:</label>
+                    <label class="form-label fw-bold">Sueldo mensual:</label>
                     <div class="input-group">
                         <span class="input-group-text" id="basic-addon1">Bs.</span>
                         <input type="text" class="form-control" name="sueldo_mensual" id="sueldoMensual"
