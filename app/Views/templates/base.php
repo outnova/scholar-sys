@@ -99,6 +99,7 @@
             'tempPassword' => session()->get('tempPassword'),
             'userUpdated' => session()->get('userUpdated'),
             'employeeUpdated' => session()->get('employeeUpdated'),
+            'recordCreated' => session()->get('recordCreated'),
             'homeUrl' => base_url('/home')
         ]) ?>;
     </script>

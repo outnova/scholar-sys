@@ -35,6 +35,10 @@ document.addEventListener("DOMContentLoaded", function () {
             showAlert('success', '¡Éxito!', flashMessages.employeeUpdated);
         }
 
+        if (flashMessages.recordCreated) {
+            showAlert('success', '¡Éxito!', flashMessages.recordCreated);
+        }
+        
         if (flashMessages.tempPassword) {
             Swal.fire({
                 icon: 'success',
