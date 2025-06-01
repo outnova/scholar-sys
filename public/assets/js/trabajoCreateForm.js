@@ -23,10 +23,17 @@ $(document).ready(function () {
         const employeeCedula = selected.data('cedula') || '';
         const employeeNivel = selected.data('nivel') || '';
 
-        const nombreCompleto = `${primerNombre} ${segundoNombre} ${primerApellido} ${segundoApellido}`.replace(/\s+/g, ' ').trim();
+        $('#primerNombre').val(primerNombre);
+        $('#primerNombreHidden').val(primerNombre);
 
-        $('#nombreCompleto').val(nombreCompleto);
-        $('#nombreCompletoHidden').val(nombreCompleto);
+        $('#segundoNombre').val(segundoNombre);
+        $('#segundoNombreHidden').val(segundoNombre);
+
+        $('#primerApellido').val(primerApellido);
+        $('#primerApellidoHidden').val(primerApellido);
+
+        $('#segundoApellido').val(segundoApellido);
+        $('#segundoApellidoHidden').val(segundoApellido);
 
         $('#employeeCedula').val(employeeCedula);
         $('#employeeCedulaHidden').val(employeeCedula);
