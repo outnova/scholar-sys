@@ -101,4 +101,31 @@
       </div>
     </div>
   </div>
+  <?php if (session()->has('pdf_data')): ?>
+  <script>
+      const data = <?= json_encode(session('pdf_data')) ?>;
+
+      const csrfName = '<?= csrf_token() ?>'; // nombre del token, por defecto 'csrf_test_name'
+      const csrfHash = '<?= csrf_hash() ?>';  // valor del token
+
+      fetch("<?= site_url('records/generatePdf') ?>", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+              "X-Requested-With": "XMLHttpRequest",
+              "<?= csrf_header() ?>": csrfHash
+          },
+          body: JSON.stringify(data),
+      })
+      .then(response => response.blob())
+      .then(blob => {
+          const url = URL.createObjectURL(blob);
+          window.open(url, "_blank");
+      })
+      .catch(error => {
+          alert("Hubo un error al generar el PDF.");
+          console.error(error);
+      });
+  </script>
+  <?php endif; ?>
 <?= $this->endSection() ?>
