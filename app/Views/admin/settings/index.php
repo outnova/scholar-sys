@@ -15,6 +15,15 @@
             */
             ?>
 
+            <?php
+                // Suponiendo que $settings['principal_ci'] = "V-12.345.678"
+                $ciCompleta = $settings['principal_ci'] ?? '';
+                $ciPartes = explode('-', $ciCompleta);
+
+                $nacionalidad = $ciPartes[0] ?? 'V'; // 'V', 'E' o 'P'
+                $ciNumeros = isset($ciPartes[1]) ? preg_replace('/[^0-9]/', '', $ciPartes[1]) : '';
+            ?>
+
             <?php if (session()->has('errores')): ?>
                 <div class="alert alert-danger">
                     <p>Corrige los siguientes errores:</p>
@@ -59,6 +68,30 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="school_footeraddress" class="form-label">Dirección (pie de página / footer)</label>
+                    <input type="text" class="form-control" id="school_footeraddress" name="school_footeraddress" 
+                        value="<?= esc($settings['school_footeraddress']) ?>" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="school_footercity" class="form-label">Ciudad (pie de página / footer)</label>
+                    <input type="text" class="form-control" id="school_footercity" name="school_footercity" 
+                        value="<?= esc($settings['school_footercity']) ?>" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="school_longcity" class="form-label">Ciudad de la Escuela (Larga)</label>
+                    <input type="text" class="form-control" id="school_longcity" name="school_longcity" 
+                        value="<?= esc($settings['school_longcity']) ?>" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="school_shortcity" class="form-label">Ciudad de la Escuela (Corta)</label>
+                    <input type="text" class="form-control" id="school_shortcity" name="school_shortcity" 
+                        value="<?= esc($settings['school_shortcity']) ?>" required>
+                </div>
+
+                <div class="mb-3">
                     <label for="school_phone" class="form-label">Teléfono</label>
                     <input type="text" class="form-control" id="school_phone" name="school_phone" 
                         value="<?= esc($settings['school_phone']) ?>" required>
@@ -80,22 +113,34 @@
                     <div class="row g-2">
                         <div class="col-sm-2">
                             <label for="principal_nacionalidad" class="form-label">Nacionalidad</label>
-                            <select class="form-select" aria-label="Default select example" id="principal_nacionalidad" name="principal_nacionalidad">
-                                <!--<option selected>Open this select menu</option>-->
-                                <option value="V">V</option>
-                                <option value="E">E</option>
-                                <option value="P">P</option>
+                            <select class="form-select" id="principal_nacionalidad" name="principal_nacionalidad">
+                                <option value="V" <?= $nacionalidad === 'V' ? 'selected' : '' ?>>V</option>
+                                <option value="E" <?= $nacionalidad === 'E' ? 'selected' : '' ?>>E</option>
+                                <option value="P" <?= $nacionalidad === 'P' ? 'selected' : '' ?>>P</option>
                             </select>
                         </div>
                         <div class="col-sm">
-                            <div class="mb-3">
-                                <label for="principal_ci" class="form-label">Cédula</label>
-                                <?php $ciLimpia = preg_replace('/[^0-9]/', '', $settings['principal_ci']); ?>
-                                <input type="text" class="form-control" id="principal_ci" name="principal_ci" 
-                                value="<?= esc($ciLimpia) ?>" required>
-                            </div>
+                            <label for="principal_ci" class="form-label">Cédula</label>
+                            <input type="text" class="form-control" id="principal_ci" name="principal_ci" 
+                                value="<?= esc($ciNumeros) ?>" required>
                         </div>
                     </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="principal_position" class="form-label">Cargo del Director</label>
+                    <select class="form-select" aria-label="Default select example" name="principal_position" id="principal_position">
+                        <option value="Director" <?= esc($settings['principal_position']) === 'Director' ? 'selected' : '' ?>>Director</option>
+                        <option value="Director (E)" <?= esc($settings['principal_position']) === 'Director (E)' ? 'selected' : '' ?>>Director (E)</option>
+                        <option value="Directora" <?= esc($settings['principal_position']) === 'Directora' ? 'selected' : '' ?>>Directora</option>
+                        <option value="Directora (E)" <?= esc($settings['principal_position']) === 'Directora (E)' ? 'selected' : '' ?>>Directora (E)</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="principal_phone" class="form-label">Teléfono del Director</label>
+                    <input type="text" class="form-control" id="principal_phone" name="principal_phone" 
+                        value="<?= esc($settings['principal_phone']) ?>" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary" disabled>Guardar Cambios</button>

@@ -20,6 +20,22 @@ $(document).ready(function () {
             regex: /^[a-zA-ZáéíóúÁÉÍÓÚüÜ0-9\s.,;ºñÑ]{1,200}$/,
             message: 'La dirección solo puede contener letras, números, espacios, puntos, comas, punto y coma, º y un máximo de 200 caracteres.'
         },
+        school_longcity: {
+            regex: /^[a-zA-ZáéíóúÁÉÍÓÚüÜ,\sñÑ]{1,100}$/,
+            message: 'El nombre de la escuela solo puede contener letras, espacios, comas y un máximo de 100 caracteres.'
+        },
+        school_shortcity: {
+            regex: /^[a-zA-ZáéíóúÁÉÍÓÚüÜ,\sñÑ]{1,64}$/,
+            message: 'El nombre de la escuela solo puede contener letras, espacios, comas y un máximo de 64 caracteres.'
+        },
+        school_footeraddress: {
+            regex: /^[a-zA-ZáéíóúÁÉÍÓÚüÜ0-9\s.,;ºñÑ]{1,200}$/,
+            message: 'La dirección del pie de página solo puede contener letras, números, espacios, puntos, comas, punto y coma, º y un máximo de 200 caracteres.'
+        },
+        school_footercity: {
+            regex: /^[a-zA-ZáéíóúÁÉÍÓÚüÜ,\sñÑ]{1,100}$/,
+            message: 'El nombre de la ciudad del pie de página solo puede contener letras, espacios, comas y un máximo de 100 caracteres.'
+        },
         school_phone: {
             regex: /^[0-9]{10,13}$/,
             message: 'El teléfono debe contener entre 10 y 13 dígitos numéricos.'
@@ -35,7 +51,11 @@ $(document).ready(function () {
         principal_ci: {
             regex: /^[0-9]{6,9}$/,
             message: 'La cédula debe contener entre 6 y 9 dígitos numéricos.'
-        }
+        },
+        principal_phone: {
+            regex: /^[0-9]{10,13}$/,
+            message: 'El teléfono debe contener entre 10 y 13 dígitos numéricos.'
+        },
     };
 
     // Aplica validación a cada campo al escribir

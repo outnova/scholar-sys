@@ -24,6 +24,22 @@ class SettingSeeder extends Seeder
                 'value' => 'Scholar Street',
             ],
             [
+                'key' => 'school_longcity', 
+                'value' => 'Beta City, Omega State',
+            ],
+            [
+                'key' => 'school_shortcity', 
+                'value' => 'Beta City',
+            ],
+            [
+                'key' => 'school_footeraddress',
+                'value' => 'Scholar Street',
+            ],
+            [
+                'key' => 'school_footercity',
+                'value' => 'Beta City, Omega State, Alpha Country',
+            ],
+            [
                 'key' => 'school_phone', 
                 'value' => '04261234567',
             ],
@@ -37,7 +53,15 @@ class SettingSeeder extends Seeder
             ],
             [
                 'key' => 'principal_ci', 
-                'value' => '12345678',
+                'value' => 'V-12.345.678',
+            ],
+            [
+                'key' => 'principal_position', 
+                'value' => 'Director (E)',
+            ],
+            [
+                'key' => 'principal_phone', 
+                'value' => '04161234567',
             ],
             [
                 'key' => 'dea_code', 

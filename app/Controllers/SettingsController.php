@@ -17,8 +17,14 @@ class SettingsController extends BaseController
             'school_address' => $settingsModel->getSetting('school_address'),
             'school_phone' => $settingsModel->getSetting('school_phone'),
             'school_email' => $settingsModel->getSetting('school_email'),
+            'school_longcity' => $settingsModel->getSetting('school_longcity'),
+            'school_shortcity' => $settingsModel->getSetting('school_shortcity'),
+            'school_footeraddress' => $settingsModel->getSetting('school_footeraddress'),
+            'school_footercity' => $settingsModel->getSetting('school_footercity'),
             'principal_name' => $settingsModel->getSetting('principal_name'),
             'principal_ci' => $settingsModel->getSetting('principal_ci'),
+            'principal_position' => $settingsModel->getSetting('principal_position'),
+            'principal_phone' => $settingsModel->getSetting('principal_phone'),
             'dea_code' => $settingsModel->getSetting('dea_code'),
             'depend_code' => $settingsModel->getSetting('depend_code'),
         ];
@@ -84,6 +90,38 @@ class SettingsController extends BaseController
                     'regex_match' => 'El {field} solo puede contener letras, números, espacios, puntos, comas, punto y coma, º y un máximo de 200 caracteres.'
                 ]
             ],
+            'school_footeraddress' => [
+                'label' => 'Dirección (pie de página / footer)',
+                'rules' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜ0-9\s.,;ºñÑ]{1,200}$/]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                    'regex_match' => 'El {field} solo puede contener letras, números, espacios, puntos, comas, punto y coma, º y un máximo de 200 caracteres.'
+                ]
+            ],
+            'school_footercity' => [
+                'label' => 'Ciudad (pie de página / footer)',
+                'rules' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜ,\sñÑ]{1,100}$/]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                    'regex_match' => 'El {field} solo puede contener letras, espacios, comas y un máximo de 100 caracteres.'
+                ]
+            ],
+            'school_longcity' => [
+                'label' => 'Ciudad de la Escuela (Larga)',
+                'rules' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜ,\sñÑ]{1,100}$/]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                    'regex_match' => 'El {field} solo puede contener letras, espacios, comas y un máximo de 100 caracteres.'
+                ]
+            ],
+            'school_shortcity' => [
+                'label' => 'Ciudad de la Escuela (Corta)',
+                'rules' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜ,\sñÑ]{1,64}$/]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                    'regex_match' => 'El {field} solo puede contener letras, espacios, comas y un máximo de 64 caracteres.'
+                ]
+            ],
             'school_phone' => [
                 'label' => 'Teléfono',
                 'rules' => 'required|regex_match[/^[0-9]{10,13}$/]',
@@ -125,10 +163,16 @@ class SettingsController extends BaseController
             'dea_code' => $this->request->getPost('dea_code'),
             'depend_code' => $this->request->getPost('depend_code'),
             'school_address' => $this->request->getPost('school_address'),
+            'school_longcity' => $this->request->getPost('school_longcity'),
+            'school_shortcity' => $this->request->getPost('school_shortcity'),
+            'school_footeraddress' => $this->request->getPost('school_footeraddress'),
+            'school_footercity' => $this->request->getPost('school_footercity'),
             'school_phone' => $this->request->getPost('school_phone'),
             'school_email' => $this->request->getPost('school_email'),
             'principal_name' => $this->request->getPost('principal_name'),
             'principal_ci' => $cedulaCompleta,
+            'principal_position' => $this->request->getPost('principal_position'),
+            'principal_phone' => $this->request->getPost('principal_phone'),
         ];
 
         if (!$this->validate($rules)) {
