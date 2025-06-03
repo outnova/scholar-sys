@@ -1,3 +1,20 @@
+<?php
+// Usar el cintillo real solo en producción
+if (ENVIRONMENT === 'production') {
+    $imgPath = WRITEPATH . 'private-assets/images/cintillo.png';
+} else {
+    // En desarrollo y testing, usar el placeholder
+    $imgPath = FCPATH . 'assets/images/cintillo-example.png';
+}
+
+// Verificar que el archivo exista
+if (!is_file($imgPath)) {
+    $imgBase64 = ''; // evitar error si no existe
+} else {
+    $imgBase64 = base64_encode(file_get_contents($imgPath));
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -34,9 +51,11 @@
     </style>
 </head>
 <body>
-    <div style="text-align: center;">
-        <img src="data:image/png;base64,<?= base64_encode(file_get_contents(FCPATH . 'assets/images/cintillo.png')) ?>" alt="Cintillo" style="width: 100%; max-width: 100%; height: auto; margin-bottom: 1rem;">
-    </div>
+    <?php if (!empty($imgBase64)): ?>
+        <img src="data:image/png;base64,<?= $imgBase64 ?>" alt="Cintillo" style="width: 100%; max-width: 100%; height: auto; margin-bottom: 1rem;">
+    <?php else: ?>
+        <p style="color: red;">Cintillo no disponible</p>
+    <?php endif; ?>
 
     <h1><?= esc($type['description']); ?></h1>
 
