@@ -38,12 +38,14 @@ if (!is_file($imgPath)) {
         .paragraph {
             text-indent: 50px;
             margin-bottom: 1rem;
+            line-height: 3em;
         }
         .firma {
             text-align: center;
             margin-top: 4rem;
             font-weight: bold;
             font-style: italic;
+            text-transform: uppercase;
         }
         .contenido {
             font-style: italic;;
@@ -85,7 +87,19 @@ if (!is_file($imgPath)) {
         ___________________________<br>
         <?= esc(get_setting('principal_name')) ?><br>
         C.I. Nº <?= esc(get_setting('principal_ci')) ?><br>
-        DIRECTOR (E)
+        <?= esc(get_setting('principal_position')) ?><br>
+        <?= esc(get_setting('principal_phone')) ?><br>
     </div>
+
+    <footer style="text-align: center; margin-top: 2rem;">
+    <hr style="border: none; height: 5px; background-color: #548dd4; margin: 0 auto 1rem; width: 100%;">
+    
+    <div style="font-size: 14px;">
+        <?= esc(get_setting('school_footeraddress') ?? 'Dirección de la escuela') ?><br>
+        <?= esc(get_setting('school_footercity') ?? 'Ciudad, Estado') ?>
+    </div>
+
+    <hr style="border: none; height: 5px; background-color: #548dd4; margin: 1rem auto 0; width: 100%;">
+</footer>
 </body>
 </html>
