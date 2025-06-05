@@ -52,6 +52,13 @@
             padding-bottom: 10px;
             border-bottom: 1px solid #ddd;
         }
+
+        .record-data {
+            font-weight: bold;
+            font-style: italic;
+            text-transform: uppercase;
+        }
+
     </style>
 <?= $this->endSection() ?>
 
@@ -93,8 +100,8 @@
             <div style="text-align: center; margin-top: 5rem;">
                 ___________________________<br>
                 <?= esc(get_setting('principal_name')) ?><br>
-                C.I. <?= esc(get_setting('principal_ci')) ?><br>
-                DIRECTOR (E)<br>
+                CÉDULA<br>
+                DIRECTOR<br>
                 TELÉFONO<br>
             </div>
             <p style="color: red; font-weight: bold; text-align: center;">
