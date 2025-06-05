@@ -38,7 +38,7 @@ if (!is_file($imgPath)) {
         .paragraph {
             text-indent: 50px;
             margin-bottom: 1rem;
-            line-height: 3em;
+            line-height: 2em;
         }
         .firma {
             text-align: center;
@@ -46,10 +46,26 @@ if (!is_file($imgPath)) {
             font-weight: bold;
             font-style: italic;
             text-transform: uppercase;
+            line-height: 1.3;
         }
         .contenido {
-            font-style: italic;;
+            font-style: italic;
         }
+
+        .record-data {
+            font-weight: bold;
+            font-style: italic;
+            text-transform: uppercase;
+            text-decoration: underline;
+        }
+
+        .money {
+            font-weight: bold;
+            font-style: italic;
+            text-decoration: underline;
+        }
+
+
     </style>
 </head>
 <body>
@@ -88,18 +104,18 @@ if (!is_file($imgPath)) {
         <?= esc(get_setting('principal_name')) ?><br>
         C.I. Nº <?= esc(get_setting('principal_ci')) ?><br>
         <?= esc(get_setting('principal_position')) ?><br>
-        <?= esc(get_setting('principal_phone')) ?><br>
+        TELÉFONO: <?= formatPhone(get_setting('principal_phone')) ?><br>
     </div>
 
-    <footer style="text-align: center; margin-top: 2rem;">
-    <hr style="border: none; height: 5px; background-color: #548dd4; margin: 0 auto 1rem; width: 100%;">
-    
-    <div style="font-size: 14px;">
-        <?= esc(get_setting('school_footeraddress') ?? 'Dirección de la escuela') ?><br>
-        <?= esc(get_setting('school_footercity') ?? 'Ciudad, Estado') ?>
-    </div>
+    <footer style="text-align: center; margin-top: 2rem; position: fixed; left: 0; bottom: 0; width: 100%;">
+        <hr style="border: none; height: 8px; background-color: #548dd4; width: 100%;">
+        
+        <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 0.5rem; margin-top: 0.5rem; line-height: 1.3;">
+            <?= esc(get_setting('school_footeraddress') ?? 'Dirección de la escuela') ?><br>
+            <?= esc(get_setting('school_footercity') ?? 'Ciudad, Estado') ?>
+        </div>
 
-    <hr style="border: none; height: 5px; background-color: #548dd4; margin: 1rem auto 0; width: 100%;">
-</footer>
+        <hr style="border: none; height: 8px; background-color: #548dd4; width: 100%;">
+    </footer>
 </body>
 </html>
