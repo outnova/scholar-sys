@@ -49,36 +49,35 @@
                 <h4>Datos del empleado</h4>
 
                 <div class="mb-3">
-                    <div class="row">
-                        <div class="col">
+                    <div class="row g-3">
+                        <div class="col-md-3 col-6">
                             <label class="form-label fw-bold">Primer nombre:</label>
                             <input type="text" id="primerNombre" class="form-control" disabled
                                 value="<?= esc($formData['primer_nombre'] ?? '') ?>">
                             <input type="hidden" name="primer_nombre" id="primerNombreHidden"
                                 value="<?= esc($formData['primer_nombre'] ?? '') ?>">
                         </div>
-                        <div class="col">
+                        <div class="col-md-3 col-6">
                             <label class="form-label fw-bold">Segundo nombre:</label>
                             <input type="text" id="segundoNombre" class="form-control" disabled
                                 value="<?= esc($formData['segundo_nombre'] ?? '') ?>">
                             <input type="hidden" name="segundo_nombre" id="segundoNombreHidden"
                                 value="<?= esc($formData['segundo_nombre'] ?? '') ?>">
                         </div>
-                        <div class="col">
+                        <div class="col-md-3 col-6">
                             <label class="form-label fw-bold">Primer apellido:</label>
                             <input type="text" id="primerApellido" class="form-control" disabled
                                 value="<?= esc($formData['primer_apellido'] ?? '') ?>">
                             <input type="hidden" name="primer_apellido" id="primerApellidoHidden"
                                 value="<?= esc($formData['primer_apellido'] ?? '') ?>">
                         </div>
-                        <div class="col">
+                        <div class="col-md-3 col-6">
                             <label class="form-label fw-bold">Segundo apellido:</label>
                             <input type="text" id="segundoApellido" class="form-control" disabled
                                 value="<?= esc($formData['segundo_apellido'] ?? '') ?>">
                             <input type="hidden" name="segundo_apellido" id="segundoApellidoHidden"
                                 value="<?= esc($formData['segundo_apellido'] ?? '') ?>">
                         </div>
-                            
                     </div>
                 </div>
 
