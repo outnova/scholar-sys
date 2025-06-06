@@ -6,12 +6,27 @@ $(document).ready(function () {
         allowClear: true
     });
 
-    // Activar el botón "Siguiente" cuando se seleccione un empleado
+    // Activar o desactivar el botón cuando cambia el empleado
     $('#employee_id').on('change', function () {
-        $('#nextStep').prop('disabled', !this.value);
+        const hasValue = !!this.value;
+        $('#nextStep').prop('disabled', !hasValue);
+
+        // Solo ocultar si se está limpiando (clear)
+        if (!hasValue) {
+            // Usar setTimeout para evitar conflicto con scroll de Select2
+            setTimeout(() => {
+                $('#employeeDataContainer').addClass('d-none');
+            }, 10);
+        }
     });
 
-    // Lógica para mostrar los datos al hacer clic en "Siguiente"
+    // Manejar específicamente el "clear" de Select2
+    $('#employee_id').on('select2:unselect', function () {
+        $('#employeeDataContainer').addClass('d-none');
+        $('#nextStep').prop('disabled', true);
+    });
+    
+    // Mostrar datos y deshabilitar el botón
     $('#nextStep').on('click', function () {
         const selected = $('#employee_id option:selected');
 
@@ -45,8 +60,12 @@ $(document).ready(function () {
         $('#employeeNivelHidden').val(employeeNivel);
 
         $('#employeeDataContainer').removeClass('d-none');
+
+        // Deshabilitar el botón después de consultar
+        $(this).prop('disabled', true);
     });
 });
+
 
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('form');
@@ -75,5 +94,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Deshabilitar el botón "Siguiente"
         document.getElementById('nextStep').setAttribute('disabled', 'disabled');
+
+        $(form).find('input, select, textarea').each(function () {
+            clearErrors($(this));
+        });
     });
 });
