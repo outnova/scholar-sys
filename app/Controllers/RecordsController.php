@@ -184,9 +184,9 @@ class RecordsController extends BaseController
     {
         $rules = [
             'trabajo' => [
-                'cargo_funciones' => 'required|regex_match[/^[a-zA-Z0-9áéíóúÁÉÍÓÚüÜñÑ\s\/\-"”]+$/]',
+                'cargo_funciones' => 'required|regex_match[/^[a-zA-Z0-9áéíóúÁÉÍÓÚüÜñÑ\s\/\-]+$/]',
                 'codigo_cargo'     => 'required|alpha_numeric',
-                'dependencia'     => 'required|regex_match[/^[a-zA-Z0-9áéíóúÁÉÍÓÚüÜñÑ\s\/\-"”]+$/]',
+                'dependencia'     => 'required|regex_match[/^[a-zA-Z0-9áéíóúÁÉÍÓÚüÜñÑ\s\/\-."”]+$/]',
                 'codigo_dependencia' => 'required|numeric',
                 'sueldo_mensual'     => 'required|regex_match[/^\d+([.,]\d{1,2})?$/]',
             ],
