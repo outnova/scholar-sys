@@ -68,6 +68,18 @@
 <div class="container mt-4">
     <h3>Vista previa de la constancia</h3>
 
+    <?php if (session('error')): ?>
+    <div class="alert alert-danger"><?= session('error') ?></div>
+    <?php endif; ?>
+
+    <?php if (session('validation_errors')): ?>
+        <ul class="alert alert-warning">
+            <?php foreach (session('validation_errors') as $field => $error): ?>
+                <li><?= esc($error) ?></li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+
     <div style="overflow-x: auto;">
         <div class="document-preview">
             <div class="watermark">VISTA PREVIA - SIN VALIDEZ</div>
