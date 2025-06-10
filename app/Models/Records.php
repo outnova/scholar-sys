@@ -15,6 +15,7 @@ class Records extends Model
     protected $protectFields    = true;
     */
     protected $allowedFields    = [
+        'type_id',
         'status',
         'subject',
         'description',
@@ -63,5 +64,7 @@ class Records extends Model
     */
 
     // Validation
-    protected $validationRules      = [];
+    protected $validationRules      = [
+        'status' => 'in_list[Emitida,Anulada]',
+    ];
 }
