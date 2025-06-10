@@ -19,7 +19,7 @@ class AddRecordsTable extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 20,
                 'null' => false,
-                'default' => 'Null',
+                'default' => 'Emitida',
             ],
             'subject' => [
                 'type' => 'VARCHAR',
