@@ -65,7 +65,7 @@ class RecordsController extends BaseController
 
         if($slug == 'trabajo') {
             $employeesModel = new Employees();
-            $data['employees'] = $employeesModel->findAll();
+            $data['employees'] = $employeesModel->where('active', 1)->findAll();
         }
 
         if (!is_file(APPPATH . "Views/records/forms/{$slug}.php")) {
@@ -150,6 +150,9 @@ class RecordsController extends BaseController
 
         $dataToSave = [
             'type_id' => $typeId ?? null,
+            'status' => 'Emitida',
+            'subject' => 'Constancia',
+            'description' => $type['description'],
             'employee_id' => $data['employee_id'] ?? null,
             'created_by' => session()->get('user_id') ?? null,
             'target_pn' => $data['primer_nombre'] ?? '',
@@ -167,16 +170,24 @@ class RecordsController extends BaseController
         ];
 
         // Validación y guardado
-        //$this->recordsModel->insert($dataToSave);
+        if (!$this->recordsModel->insert($dataToSave)) {
+            // Obtener errores del modelo
+            $errors = $this->recordsModel->errors();
+
+            // Puedes registrar los errores en el log
+            log_message('error', 'Error al insertar constancia: ' . print_r($errors, true));
+
+            // Redirigir con mensaje de error
+            return redirect()->back()->withInput()->with('error', 'Hubo un problema al guardar la constancia.')->with('validation_errors', $errors);
+        }
+
+        // Si llegó aquí, se guardó correctamente
 
         // Generación del PDF (ej: dompdf, mpdf, etc.)
         // ...
 
         session()->remove(['preview_data', 'preview_slug']);
-
         session()->setFlashdata('pdf_data', $data);
-
-        //return print_r($dataToSave); // Para depuración, eliminar en producción
 
         return redirect()->to('records')->with('recordCreated', '¡Constancia generada con éxito!');
     }
