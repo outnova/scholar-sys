@@ -1,5 +1,5 @@
 <p class="paragraph">
-    Quien suscribe <span class="record-data"><?= esc(get_setting('principal_name')) ?></span>, portador de la cédula de identidad Nº <span class="record-data"><?= esc(get_setting('principal_ci')) ?></span>, en mi condición de Director (e) de la <span class="record-data"><?= esc(get_setting('school_name')) ?></span>, ubicada en la <?= esc(get_setting('school_address')) ?> de esta ciudad de <?= esc(get_setting('school_longcity')) ?>.
+    Quien suscribe <span class="record-data"><?= esc(get_setting('principal_name')) ?></span>, portador de la cédula de identidad Nº <span class="record-data"><?= esc(get_setting('principal_ci')) ?></span>, en mi condición de <span class="rdata-wul"><?= esc(get_setting('principal_position')) ?></span> de la <span class="record-data"><?= esc(get_setting('school_name')) ?></span>, ubicada en la <?= esc(get_setting('school_address')) ?> de esta ciudad de <?= esc(get_setting('school_longcity')) ?>.
 </p>
 <p class="paragraph">
     Por medio de la presente, hago constar que el (la) ciudadano(a): <span class="record-data"><?= esc($data['primer_nombre']) ?> <?= esc($data['segundo_nombre']) ?> <?= esc($data['primer_apellido']) ?> <?= esc($data['segundo_apellido']) ?></span>, 
