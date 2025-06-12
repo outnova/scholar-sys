@@ -65,7 +65,11 @@ if (!is_file($imgPath)) {
             text-decoration: underline;
         }
 
-
+        .rdata-wul {
+            font-weight: bold;
+            font-style: italic;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
@@ -84,8 +88,8 @@ if (!is_file($imgPath)) {
                 echo view('records/previews/trabajo', ['data' => $data]);
                 break;
 
-            case 'constancia-estudio':
-                echo view('records/previews/constancia_estudio', ['data' => $data]);
+            case 'estudio':
+                echo view('records/previews/estudio', ['data' => $data]);
                 break;
 
             case 'constancia-inscripcion':

@@ -59,6 +59,12 @@
             text-transform: uppercase;
         }
 
+        .rdata-wul {
+            font-weight: bold;
+            font-style: italic;
+            text-transform: uppercase;
+        }
+
     </style>
 <?= $this->endSection() ?>
 
@@ -94,8 +100,8 @@
                         echo view('records/previews/trabajo', ['data' => $data]);
                         break;
 
-                    case 'constancia-estudio':
-                        echo view('records/previews/constancia_estudio', ['data' => $data]);
+                    case 'estudio':
+                        echo view('records/previews/estudio', ['data' => $data]);
                         break;
 
                     case 'constancia-inscripcion':
@@ -148,6 +154,22 @@
                             'codigo_dependencia' => 'Código dependencia',
                             'sueldo_mensual' => 'Sueldo mensual',
                         ],
+                        'estudio' => [
+                            'primer_nombre' => 'Primer nombre',
+                            'segundo_nombre' => 'Segundo nombre',
+                            'primer_apellido' => 'Primer apellido',
+                            'segundo_apellido' => 'Segundo apellido',
+                            'nacionalidad' => 'Nacionalidad',
+                            'cedula' => 'Cédula',
+                            'edad' => 'Edad',
+                            'birthcity' => 'Ciudad de Nacimiento (Ciudad)',
+                            'states' => 'Estado de Nacimiento',
+                            'cursa_curso' => 'Situación del Estudiante',
+                            'nivel' => 'Nivel',
+                            'grado' => 'Sala / Grado / Año',
+                            'seccion' => 'Sección',
+                            'periodo_escolar' => 'Periodo escolar',
+                        ]
                     ];
                     $campos = $fieldsBySlug[$slug] ?? [];
                 ?>
