@@ -148,6 +148,22 @@ class RecordsController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
+        // Preparar cédula formateada si se indica tipo_cedula
+        $cedulaFormateadaFinal = $data['cedula'] ?? '';
+
+        if (!empty($data['tipo_cedula']) && !empty($data['nacionalidad']) && !empty($data['cedula'])) {
+            $nacionalidad = strtoupper(trim($data['nacionalidad']));
+            $cedula = preg_replace('/\D/', '', $data['cedula']); // Asegura solo dígitos
+
+            if ($data['tipo_cedula'] === 'cidentidad') {
+                // Cédula de identidad → con guion y puntos
+                $cedulaFormateadaFinal = $nacionalidad . '-' . number_format($cedula, 0, '', '.');
+            } elseif ($data['tipo_cedula'] === 'cescolar') {
+                // Cédula escolar → sin guion ni puntos
+                $cedulaFormateadaFinal = $nacionalidad . $cedula;
+            }
+        }
+
         $dataToSave = [
             'type_id' => $typeId ?? null,
             'status' => 'Emitida',
@@ -159,7 +175,7 @@ class RecordsController extends BaseController
             'target_sn' => $data['segundo_nombre'] ?? '',
             'target_pa' => $data['primer_apellido'] ?? '',
             'target_sa' => $data['segundo_apellido'] ?? '',
-            'cedula' => $data['cedula'] ?? '',
+            'cedula' => $cedulaFormateadaFinal,
             'nivel' => $data['nivel'] ?? '',
             'position' => $data['cargo_funciones'] ?? '',
             'position_code' => $data['codigo_cargo'] ?? '',
@@ -167,7 +183,20 @@ class RecordsController extends BaseController
             'dependence_code' => $data['codigo_dependencia'] ?? '',
             'salary' => $data['sueldo_mensual'] ?? '',
             'start_date' => $data['fecha_ingreso'] ?? '',
+            'grade' => $data['grado'] ?? '',
+            'section' => $data['seccion'] ?? '',
+            'level' => $data['nivel'] ?? '',
+            'scholar_period' => $data['periodo_escolar'] ?? '',
+            'student_age' => $data['edad'],
+            'birth_city' => $data['birthcity'],
+            'birth_state' => $data['state'],
+            'current_course' => $data['cursa_curso'],
         ];
+
+        // Elimina claves con valor vacío (null, '', o solo espacios)
+        $dataToSave = array_filter($dataToSave, function ($val) {
+            return $val !== null && trim($val) !== '';
+        });
 
         // Validación y guardado
         if (!$this->recordsModel->insert($dataToSave)) {
@@ -200,6 +229,21 @@ class RecordsController extends BaseController
                 'dependencia'     => 'required|regex_match[/^[a-zA-Z0-9áéíóúÁÉÍÓÚüÜñÑ\s\/\-."”]+$/]',
                 'codigo_dependencia' => 'required|numeric',
                 'sueldo_mensual'     => 'required|regex_match[/^\d+([.,]\d{1,2})?$/]',
+            ],
+            'estudio' => [
+                'primer_nombre' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'segundo_nombre' => 'permit_empty|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'primer_apellido' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'segundo_apellido' => 'permit_empty|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'cedula' => 'required|regex_match[/^\d{7,15}$/]',
+                'edad' => 'required|regex_match[/^\d{1,2}$/]',
+                'birthcity' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'grado' => 'required|regex_match[/^[a-zA-Z0-9ñÑ ]+$/]',
+                'seccion' => 'required|regex_match[/^[a-zA-Z]$/]',
+                'periodo_escolar' => [
+                    'label' => 'Periodo Escolar',
+                    'rules' => 'required|regex_match[/^(20\d{2})-(20\d{2})$/]|valid_periodo'
+                ],
             ],
             // otros tipos de constancia...
         ];
