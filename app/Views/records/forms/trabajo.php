@@ -106,35 +106,35 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label fw-bold">Cargo/Funciones:</label>
+                    <label for="cargo_funciones" class="form-label fw-bold">Cargo/Funciones:</label>
                     <input type="text" class="form-control" name="cargo_funciones" id="cargoFunciones"
                         placeholder="Cargo o funciones del empleado"
                         value="<?= esc($formData['cargo_funciones'] ?? '') ?>">
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label fw-bold">Código del cargo:</label>
+                    <label for="codigo_cargo" class="form-label fw-bold">Código del cargo:</label>
                     <input type="text" class="form-control" name="codigo_cargo" id="codigoCargo"
                         placeholder="Código del cargo del empleado"
                         value="<?= esc($formData['codigo_cargo'] ?? '') ?>">
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label fw-bold">Dependencia:</label>
+                    <label for="dependencia" class="form-label fw-bold">Dependencia:</label>
                     <input type="text" class="form-control" name="dependencia" id="dependencia"
                         placeholder="Dependencia del empleado"
                         value="<?= esc($formData['dependencia'] ?? '') ?>">
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label fw-bold">Código de la dependencia:</label>
+                    <label for="codigo_dependencia" class="form-label fw-bold">Código de la dependencia:</label>
                     <input type="text" class="form-control" name="codigo_dependencia" id="codigoDependencia"
                         placeholder="Código de la dependencia del empleado"
                         value="<?= esc($formData['codigo_dependencia'] ?? '') ?>">
                 </div>
                 
                 <div class="mb-3">
-                    <label class="form-label fw-bold">Sueldo mensual:</label>
+                    <label for="sueldo_mensual" class="form-label fw-bold">Sueldo mensual:</label>
                     <div class="input-group">
                         <span class="input-group-text" id="basic-addon1">Bs.</span>
                         <input type="text" class="form-control" name="sueldo_mensual" id="sueldoMensual"

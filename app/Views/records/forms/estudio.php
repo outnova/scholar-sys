@@ -24,22 +24,22 @@
                 <div class="mb-3">
                     <div class="row g-3">
                         <div class="col-md-3 col-6">
-                            <label class="form-label fw-bold">Primer nombre:</label>
+                            <label for="primer_nombre" class="form-label fw-bold">Primer nombre:</label>
                             <input type="text" class="form-control" name="primer_nombre" id="primerNombre" placeholder="Primer nombre"
                                 value="<?= old('primer_nombre') ?>">
                         </div>
                         <div class="col-md-3 col-6">
-                            <label class="form-label fw-bold">Segundo nombre:</label>
+                            <label for="segundo_nombre" class="form-label fw-bold">Segundo nombre:</label>
                             <input type="text" class="form-control" name="segundo_nombre" id="segundoNombre" placeholder="Segundo nombre"
                                 value="<?= old('segundo_nombre') ?>">
                         </div>
                         <div class="col-md-3 col-6">
-                            <label class="form-label fw-bold">Primer apellido:</label>
+                            <label for="primer_apellido" class="form-label fw-bold">Primer apellido:</label>
                             <input type="text" class="form-control" name="primer_apellido" id="primerApellido" placeholder="Primer apellido"
                                 value="<?= old('primer_apellido') ?>">
                         </div>
                         <div class="col-md-3 col-6">
-                            <label class="form-label fw-bold">Segundo apellido:</label>
+                            <label for="segundo_apellido" class="form-label fw-bold">Segundo apellido:</label>
                             <input type="text" class="form-control" name="segundo_apellido" id="segundoApellido" placeholder="Segundo apellido"
                                 value="<?= old('segundo_apellido') ?>">
                         </div>
@@ -85,13 +85,13 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label fw-bold">Edad:</label>
+                    <label for="edad" class="form-label fw-bold">Edad:</label>
                     <input type="text" class="form-control" name="edad" id="edad" placeholder="Ej: 12"
                         value="<?= old('edad') ?>">
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label fw-bold">Lugar de Nacimiento (Ciudad):</label>
+                    <label for="birthcity" class="form-label fw-bold">Lugar de Nacimiento (Ciudad):</label>
                     <input type="text" class="form-control" name="birthcity" id="birthcity" placeholder="Ej: Coro"
                         value="<?= old('birthcity') ?>">
                 </div>
@@ -148,19 +148,19 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label fw-bold">Sala / Grado / Año:</label>
+                    <label for="grado" class="form-label fw-bold">Sala / Grado / Año:</label>
                     <input type="text" class="form-control" name="grado" id="grado" placeholder="Ej: 5to grado, 5to año, Sala de 3 años..."
                         value="<?= old('grado') ?>">
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label fw-bold">Sección:</label>
+                    <label for="seccion" class="form-label fw-bold">Sección:</label>
                     <input type="text" class="form-control" name="seccion" id="seccion" placeholder="Ej: A"
                         value="<?= old('seccion') ?>">
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label fw-bold">Periodo escolar:</label>
+                    <label for="periodo_escolar" class="form-label fw-bold">Periodo escolar:</label>
                     <input type="text" class="form-control" name="periodo_escolar" id="periodoEscolar" placeholder="Ej: 2024-2025"
                         value="<?= old('periodo_escolar') ?>">
                 </div>
