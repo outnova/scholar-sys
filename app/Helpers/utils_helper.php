@@ -56,3 +56,23 @@ function formatPhone($telefono) {
     // Si no coincide con el formato esperado, devolver el original
     return $telefono;
 }
+
+function formatCedulaEx(?string $cedula, ?string $nacionalidad, ?string $tipoCedula): string
+{
+    if (empty($cedula) || empty($nacionalidad) || empty($tipoCedula)) {
+        return $cedula ?? '';
+    }
+
+    $nacionalidad = strtoupper(trim($nacionalidad));
+    $soloNumeros = preg_replace('/\D/', '', $cedula); // limpia
+
+    if ($tipoCedula === 'cidentidad') {
+        // V-12.345.678
+        return $nacionalidad . '-' . number_format((int)$soloNumeros, 0, '', '.');
+    } elseif ($tipoCedula === 'cescolar') {
+        // V12345678
+        return $nacionalidad . $soloNumeros;
+    }
+
+    return $cedula; // fallback si tipo no válido
+}
