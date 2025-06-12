@@ -168,7 +168,7 @@ class RecordsController extends BaseController
             'type_id' => $typeId ?? null,
             'status' => 'Emitida',
             'subject' => 'Constancia',
-            'description' => $type['description'],
+            'description' => $type['description'] ?? '',
             'employee_id' => $data['employee_id'] ?? null,
             'created_by' => session()->get('user_id') ?? null,
             'target_pn' => $data['primer_nombre'] ?? '',
@@ -187,10 +187,10 @@ class RecordsController extends BaseController
             'section' => $data['seccion'] ?? '',
             'level' => $data['nivel'] ?? '',
             'scholar_period' => $data['periodo_escolar'] ?? '',
-            'student_age' => $data['edad'],
-            'birth_city' => $data['birthcity'],
-            'birth_state' => $data['state'],
-            'current_course' => $data['cursa_curso'],
+            'student_age' => $data['edad'] ?? '',
+            'birth_city' => $data['birthcity'] ?? '',
+            'birth_state' => $data['state'] ?? '',
+            'current_course' => $data['cursa_curso'] ?? '',
         ];
 
         // Elimina claves con valor vacío (null, '', o solo espacios)
@@ -230,7 +230,7 @@ class RecordsController extends BaseController
                 'codigo_dependencia' => 'required|numeric',
                 'sueldo_mensual'     => 'required|regex_match[/^\d+([.,]\d{1,2})?$/]',
             ],
-            'estudio' => [
+            'estudio', 'inscripcion' => [
                 'primer_nombre' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
                 'segundo_nombre' => 'permit_empty|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
                 'primer_apellido' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
