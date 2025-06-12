@@ -19,6 +19,11 @@ function validateField(field, force = false) {
         return false;
     }
 
+    if (value && typeof field.customValidate === 'function' && !field.customValidate(value)) {
+        showError(element, field.errorMsg);
+        return false;
+    }
+
     return true;
 }
 
@@ -56,6 +61,76 @@ $(document).ready(function () {
                 required: true,
                 pattern: /^\d+([.,]\d{1,2})?$/,
                 errorMsg: 'Número positivo con hasta 2 decimales (ej. 908,88).'
+            }
+        ],
+        'estudio':
+        [
+            {
+                selector: '#primerNombre',
+                required: true,
+                pattern: /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/,
+                errorMsg: 'Debe contener solo letras'
+            },
+            {
+                selector: '#segundoNombre',
+                required: false,
+                pattern: /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/,
+                errorMsg: 'Debe contener solo letras'
+            },
+            {
+                selector: '#primerApellido',
+                required: true,
+                pattern: /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/,
+                errorMsg: 'Debe contener solo letras'
+            },
+            {
+                selector: '#segundoApellido',
+                required: false,
+                pattern: /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/,
+                errorMsg: 'Debe contener solo letras'
+            },
+            {
+                selector: '#cedula',
+                required: true,
+                pattern: /^\d{7,15}$/,
+                errorMsg: 'Debe contener solo números (7 a 15 dígitos).'
+            },
+            {
+                selector: '#edad',
+                required: true,
+                pattern: /^\d{1,2}$/,
+                errorMsg: 'Debe contener solo números (1 a 2 dígitos).'
+            },
+            {
+                selector: '#birthcity',
+                required: true,
+                pattern: /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/,
+                errorMsg: 'Debe contener solo letras'
+            },
+            {
+                selector: '#grado',
+                required: true,
+                pattern: /^[a-zA-Z0-9ñÑ ]+$/,
+                errorMsg: 'Solo letras, números y espacios.'
+            },
+            {
+                selector: '#seccion',
+                required: true,
+                pattern: /^[a-zA-Z]$/,
+                errorMsg: 'Solo una letra (A-Z o a-z).'
+            },
+            {
+                selector: '#periodoEscolar',
+                required: true,
+                pattern: /^(20\d{2})-(20\d{2})$/,
+                errorMsg: 'Debe tener el formato 2024-2025 y los años deben ser consecutivos.',
+                customValidate: function(value) {
+                    const match = value.match(/^(20\d{2})-(20\d{2})$/);
+                    if (!match) return false;
+                    const anioInicio = parseInt(match[1], 10);
+                    const anioFin = parseInt(match[2], 10);
+                    return anioFin === anioInicio + 1;
+                }
             }
         ]
     };
