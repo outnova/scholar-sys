@@ -92,8 +92,8 @@ if (!is_file($imgPath)) {
                 echo view('records/previews/estudio', ['data' => $data]);
                 break;
 
-            case 'constancia-inscripcion':
-                echo view('records/previews/constancia_inscripcion', ['data' => $data]);
+            case 'inscripcion':
+                echo view('records/previews/inscripcion', ['data' => $data]);
                 break;
 
             default:

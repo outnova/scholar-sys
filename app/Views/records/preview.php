@@ -104,8 +104,8 @@
                         echo view('records/previews/estudio', ['data' => $data]);
                         break;
 
-                    case 'constancia-inscripcion':
-                        echo view('records/previews/constancia_inscripcion', ['data' => $data]);
+                    case 'inscripcion':
+                        echo view('records/previews/inscripcion', ['data' => $data]);
                         break;
 
                     default:
@@ -165,6 +165,21 @@
                             'birthcity' => 'Ciudad de Nacimiento (Ciudad)',
                             'states' => 'Estado de Nacimiento',
                             'cursa_curso' => 'Situación del Estudiante',
+                            'nivel' => 'Nivel',
+                            'grado' => 'Sala / Grado / Año',
+                            'seccion' => 'Sección',
+                            'periodo_escolar' => 'Periodo escolar',
+                        ],
+                        'inscripcion' => [
+                            'primer_nombre' => 'Primer nombre',
+                            'segundo_nombre' => 'Segundo nombre',
+                            'primer_apellido' => 'Primer apellido',
+                            'segundo_apellido' => 'Segundo apellido',
+                            'nacionalidad' => 'Nacionalidad',
+                            'cedula' => 'Cédula',
+                            'edad' => 'Edad',
+                            'birthcity' => 'Ciudad de Nacimiento (Ciudad)',
+                            'states' => 'Estado de Nacimiento',
                             'nivel' => 'Nivel',
                             'grado' => 'Sala / Grado / Año',
                             'seccion' => 'Sección',
