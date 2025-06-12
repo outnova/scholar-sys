@@ -48,7 +48,7 @@ class Records extends Model
         'student_age',
         'birth_city',
         'birth_state',
-        'if_attends',
+        'current_course',
         'start_date',
         'end_date',
         'target_school',
