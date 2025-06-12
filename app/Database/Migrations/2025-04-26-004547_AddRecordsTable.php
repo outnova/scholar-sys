@@ -172,11 +172,6 @@ class AddRecordsTable extends Migration
                 'constraint' => 45,
                 'null' => true,
             ],
-            'if_attends' => [
-                'SMALLINT',
-                'constraint' => 1,
-                'null' => true,
-            ],
             'start_date' => [
                 'type' => 'DATE',
                 'null' => true,
