@@ -108,6 +108,10 @@
                         echo view('records/previews/inscripcion', ['data' => $data]);
                         break;
 
+                    case 'buena-conducta':
+                        echo view('records/previews/buena-conducta', ['data' => $data]);
+                        break;
+
                     default:
                         echo "<p>Tipo de constancia no soportado.</p>";
                         break;
@@ -180,6 +184,18 @@
                             'edad' => 'Edad',
                             'birthcity' => 'Ciudad de Nacimiento (Ciudad)',
                             'states' => 'Estado de Nacimiento',
+                            'nivel' => 'Nivel',
+                            'grado' => 'Sala / Grado / Año',
+                            'seccion' => 'Sección',
+                            'periodo_escolar' => 'Periodo escolar',
+                        ],
+                        'buena-conducta' => [
+                            'primer_nombre' => 'Primer nombre',
+                            'segundo_nombre' => 'Segundo nombre',
+                            'primer_apellido' => 'Primer apellido',
+                            'segundo_apellido' => 'Segundo apellido',
+                            'nacionalidad' => 'Nacionalidad',
+                            'cedula' => 'Cédula',
                             'nivel' => 'Nivel',
                             'grado' => 'Sala / Grado / Año',
                             'seccion' => 'Sección',

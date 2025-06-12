@@ -245,6 +245,19 @@ class RecordsController extends BaseController
                     'rules' => 'required|regex_match[/^(20\d{2})-(20\d{2})$/]|valid_periodo'
                 ],
             ],
+            'buena-conducta' => [
+                'primer_nombre' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'segundo_nombre' => 'permit_empty|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'primer_apellido' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'segundo_apellido' => 'permit_empty|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'cedula' => 'required|regex_match[/^\d{7,15}$/]',
+                'grado' => 'required|regex_match[/^[a-zA-Z0-9ñÑ ]+$/]',
+                'seccion' => 'required|regex_match[/^[a-zA-Z]$/]',
+                'periodo_escolar' => [
+                    'label' => 'Periodo Escolar',
+                    'rules' => 'required|regex_match[/^(20\d{2})-(20\d{2})$/]|valid_periodo'
+                ],
+            ],
             // otros tipos de constancia...
         ];
 
