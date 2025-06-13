@@ -112,6 +112,10 @@
                         echo view('records/previews/buena-conducta', ['data' => $data]);
                         break;
 
+                    case 'retiro':
+                        echo view('records/previews/retiro', ['data' => $data]);
+                        break;
+
                     default:
                         echo "<p>Tipo de constancia no soportado.</p>";
                         break;
@@ -200,7 +204,26 @@
                             'grado' => 'Sala / Grado / Año',
                             'seccion' => 'Sección',
                             'periodo_escolar' => 'Periodo escolar',
-                        ]
+                        ],
+                        'retiro' => [
+                            'primer_nombre' => 'Primer nombre',
+                            'segundo_nombre' => 'Segundo nombre',
+                            'primer_apellido' => 'Primer apellido',
+                            'segundo_apellido' => 'Segundo apellido',
+                            'nacionalidad' => 'Nacionalidad',
+                            'cedula' => 'Cédula',
+                            'nivel' => 'Nivel',
+                            'grado' => 'Sala / Grado / Año',
+                            'seccion' => 'Sección',
+                            'periodo_escolar' => 'Periodo escolar',
+                            'rprimer_nombre' => 'Primer nombre Representante',
+                            'rsegundo_nombre' => 'Segundo nombre Representante',
+                            'rprimer_apellido' => 'Primer apellido Representante',
+                            'rsegundo_apellido' => 'Segundo apellido Representante',
+                            'r-nacionalidad' => 'Nacionalidad Representante',
+                            'r-cedula' => 'Cédula Representante',
+                            'motivo' => 'Motivo del Retiro',
+                        ],
                     ];
                     $campos = $fieldsBySlug[$slug] ?? [];
                 ?>
