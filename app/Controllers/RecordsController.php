@@ -223,7 +223,22 @@ class RecordsController extends BaseController
                 'codigo_dependencia' => 'required|numeric',
                 'sueldo_mensual'     => 'required|regex_match[/^\d+([.,]\d{1,2})?$/]',
             ],
-            'estudio', 'inscripcion' => [
+            'estudio' => [
+                'primer_nombre' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'segundo_nombre' => 'permit_empty|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'primer_apellido' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'segundo_apellido' => 'permit_empty|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'cedula' => 'required|regex_match[/^\d{7,15}$/]',
+                'edad' => 'required|regex_match[/^\d{1,2}$/]',
+                'birthcity' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'grado' => 'required|regex_match[/^[a-zA-Z0-9ñÑ ]+$/]',
+                'seccion' => 'required|regex_match[/^[a-zA-Z]$/]',
+                'periodo_escolar' => [
+                    'label' => 'Periodo Escolar',
+                    'rules' => 'required|regex_match[/^(20\d{2})-(20\d{2})$/]|valid_periodo'
+                ],
+            ],
+            'inscripcion' => [
                 'primer_nombre' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
                 'segundo_nombre' => 'permit_empty|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
                 'primer_apellido' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
