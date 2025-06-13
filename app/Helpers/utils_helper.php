@@ -57,22 +57,21 @@ function formatPhone($telefono) {
     return $telefono;
 }
 
-function formatCedulaEx(?string $cedula, ?string $nacionalidad, ?string $tipoCedula): string
+function formatCedulaEx(?string $cedula, ?string $nacionalidad, ?string $tipoCedula = null): string
 {
-    if (empty($cedula) || empty($nacionalidad) || empty($tipoCedula)) {
+    if (empty($cedula) || empty($nacionalidad)) {
         return $cedula ?? '';
     }
 
     $nacionalidad = strtoupper(trim($nacionalidad));
-    $soloNumeros = preg_replace('/\D/', '', $cedula); // limpia
+    $soloNumeros = preg_replace('/\D/', '', $cedula); // Solo dígitos
 
-    if ($tipoCedula === 'cidentidad') {
-        // V-12.345.678
-        return $nacionalidad . '-' . number_format((int)$soloNumeros, 0, '', '.');
-    } elseif ($tipoCedula === 'cescolar') {
-        // V12345678
+    // Formato por tipo
+    if ($tipoCedula === 'cescolar') {
+        // Cédula escolar: V12345678
         return $nacionalidad . $soloNumeros;
     }
 
-    return $cedula; // fallback si tipo no válido
+    // Default o tipo cédula de identidad (o sin tipo): V-12.345.678
+    return $nacionalidad . '-' . number_format((int)$soloNumeros, 0, '', '.');
 }
