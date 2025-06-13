@@ -75,3 +75,12 @@ function formatCedulaEx(?string $cedula, ?string $nacionalidad, ?string $tipoCed
     // Default o tipo cédula de identidad (o sin tipo): V-12.345.678
     return $nacionalidad . '-' . number_format((int)$soloNumeros, 0, '', '.');
 }
+
+function formatDescription(string $desc): string
+{
+    if ($desc === 'Constancia de Retiro y Buena Conducta') {
+        return 'Constancia de Buena Conducta';
+    }
+
+    return $desc;
+}

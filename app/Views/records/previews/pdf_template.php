@@ -79,7 +79,7 @@ if (!is_file($imgPath)) {
         <p style="color: red;">Cintillo no disponible</p>
     <?php endif; ?>
 
-    <h1><?= esc($type['description']); ?></h1>
+    <h1><?= esc(formatDescription($type['description'])); ?></h1>
 
     <div class="contenido">
         <?php

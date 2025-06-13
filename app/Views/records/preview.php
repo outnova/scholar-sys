@@ -89,7 +89,7 @@
     <div style="overflow-x: auto;">
         <div class="document-preview">
             <div class="watermark">VISTA PREVIA - SIN VALIDEZ</div>
-            <h1 class="mt-3"><?= esc($type['description']); ?></h1>
+            <h1 class="mt-3"><?= esc(formatDescription($type['description'])); ?></h1>
             <p style="color: red; font-weight: bold; text-align: center;">
                 *** Este es un documento de vista previa. No posee validez. ***
             </p>
