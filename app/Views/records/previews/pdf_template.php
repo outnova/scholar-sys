@@ -104,6 +104,10 @@ if (!is_file($imgPath)) {
                 echo view('records/previews/retiro', ['data' => $data]);
                 break;
 
+            case 'retiro-conducta':
+                echo view('records/previews/retiro-conducta', ['data' => $data]);
+                break;
+
             default:
                 echo "<p>Tipo de constancia no soportado.</p>";
                 break;

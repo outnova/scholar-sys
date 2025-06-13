@@ -116,6 +116,10 @@
                         echo view('records/previews/retiro', ['data' => $data]);
                         break;
 
+                    case 'retiro-conducta':
+                        echo view('records/previews/retiro-conducta', ['data' => $data]);
+                        break;
+
                     default:
                         echo "<p>Tipo de constancia no soportado.</p>";
                         break;
@@ -206,6 +210,25 @@
                             'periodo_escolar' => 'Periodo escolar',
                         ],
                         'retiro' => [
+                            'primer_nombre' => 'Primer nombre',
+                            'segundo_nombre' => 'Segundo nombre',
+                            'primer_apellido' => 'Primer apellido',
+                            'segundo_apellido' => 'Segundo apellido',
+                            'nacionalidad' => 'Nacionalidad',
+                            'cedula' => 'Cédula',
+                            'nivel' => 'Nivel',
+                            'grado' => 'Sala / Grado / Año',
+                            'seccion' => 'Sección',
+                            'periodo_escolar' => 'Periodo escolar',
+                            'rprimer_nombre' => 'Primer nombre Representante',
+                            'rsegundo_nombre' => 'Segundo nombre Representante',
+                            'rprimer_apellido' => 'Primer apellido Representante',
+                            'rsegundo_apellido' => 'Segundo apellido Representante',
+                            'r-nacionalidad' => 'Nacionalidad Representante',
+                            'r-cedula' => 'Cédula Representante',
+                            'motivo' => 'Motivo del Retiro',
+                        ],
+                        'retiro-conducta' => [
                             'primer_nombre' => 'Primer nombre',
                             'segundo_nombre' => 'Segundo nombre',
                             'primer_apellido' => 'Primer apellido',
