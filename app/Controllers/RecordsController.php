@@ -148,21 +148,8 @@ class RecordsController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        // Preparar cédula formateada si se indica tipo_cedula
-        $cedulaFormateadaFinal = $data['cedula'] ?? '';
-
-        if (!empty($data['tipo_cedula']) && !empty($data['nacionalidad']) && !empty($data['cedula'])) {
-            $nacionalidad = strtoupper(trim($data['nacionalidad']));
-            $cedula = preg_replace('/\D/', '', $data['cedula']); // Asegura solo dígitos
-
-            if ($data['tipo_cedula'] === 'cidentidad') {
-                // Cédula de identidad → con guion y puntos
-                $cedulaFormateadaFinal = $nacionalidad . '-' . number_format($cedula, 0, '', '.');
-            } elseif ($data['tipo_cedula'] === 'cescolar') {
-                // Cédula escolar → sin guion ni puntos
-                $cedulaFormateadaFinal = $nacionalidad . $cedula;
-            }
-        }
+        $targetCedula = formatCedulaEx($data['cedula'] ?? '', $data['nacionalidad'] ?? '', $data['tipo_cedula'] ?? null);
+        $rCedula = formatCedulaEx($data['r-cedula'] ?? '', $data['r-nacionalidad'] ?? '');
 
         $dataToSave = [
             'type_id' => $typeId ?? null,
@@ -175,7 +162,7 @@ class RecordsController extends BaseController
             'target_sn' => $data['segundo_nombre'] ?? '',
             'target_pa' => $data['primer_apellido'] ?? '',
             'target_sa' => $data['segundo_apellido'] ?? '',
-            'cedula' => $cedulaFormateadaFinal,
+            'cedula' => $targetCedula ?? '',
             'nivel' => $data['nivel'] ?? '',
             'position' => $data['cargo_funciones'] ?? '',
             'position_code' => $data['codigo_cargo'] ?? '',
@@ -191,6 +178,12 @@ class RecordsController extends BaseController
             'birth_city' => $data['birthcity'] ?? '',
             'birth_state' => $data['state'] ?? '',
             'current_course' => $data['cursa_curso'] ?? '',
+            'repre_pn' => $data['rprimer_nombre'] ?? '',
+            'repre_sn' => $data['rsegundo_nombre'] ?? '',
+            'repre_pa' => $data['rprimer_apellido'] ?? '',
+            'repre_sa' => $data['rsegundo_apellido'] ?? '',
+            'repre_cedula' => $rCedula ?? '',
+            'reason' => $data['motivo'] ?? '',
         ];
 
         // Elimina claves con valor vacío (null, '', o solo espacios)
@@ -257,6 +250,25 @@ class RecordsController extends BaseController
                     'label' => 'Periodo Escolar',
                     'rules' => 'required|regex_match[/^(20\d{2})-(20\d{2})$/]|valid_periodo'
                 ],
+            ],
+            'retiro' => [
+                'primer_nombre' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'segundo_nombre' => 'permit_empty|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'primer_apellido' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'segundo_apellido' => 'permit_empty|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'cedula' => 'required|regex_match[/^\d{7,15}$/]',
+                'grado' => 'required|regex_match[/^[a-zA-Z0-9ñÑ ]+$/]',
+                'seccion' => 'required|regex_match[/^[a-zA-Z]$/]',
+                'periodo_escolar' => [
+                    'label' => 'Periodo Escolar',
+                    'rules' => 'required|regex_match[/^(20\d{2})-(20\d{2})$/]|valid_periodo'
+                ],
+                'rprimer_nombre' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'rsegundo_nombre' => 'permit_empty|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'rprimer_apellido' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'rsegundo_apellido' => 'permit_empty|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'r-cedula' => 'required|regex_match[/^\d{7,15}$/]',
+                'motivo' => 'required|regex_match[/^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$/]|max_length[45]',
             ],
             // otros tipos de constancia...
         ];
