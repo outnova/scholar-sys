@@ -184,6 +184,8 @@ class RecordsController extends BaseController
             'repre_sa' => $data['rsegundo_apellido'] ?? '',
             'repre_cedula' => $rCedula ?? '',
             'reason' => $data['motivo'] ?? '',
+            'start_date' => $data['fecha-inicio'] ?? '',
+            'end_date' => $data['fecha-fin'] ?? '',
         ];
 
         // Elimina claves con valor vacío (null, '', o solo espacios)
@@ -322,6 +324,24 @@ class RecordsController extends BaseController
                 'rsegundo_apellido' => 'permit_empty|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
                 'r-cedula' => 'required|regex_match[/^\d{7,15}$/]',
             ],
+            'pasantias' => [
+                'primer_nombre' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'segundo_nombre' => 'permit_empty|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'primer_apellido' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'segundo_apellido' => 'permit_empty|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'cedula' => 'required|regex_match[/^\d{7,15}$/]',
+                'fecha-inicio' => [
+                    'label' => 'Fecha de inicio',
+                    'rules' => 'required|valid_date[Y-m-d]'
+                ],
+                'fecha-fin' => [
+                    'label' => 'Fecha de finalización',
+                    'rules' => 'required|valid_date[Y-m-d]|after_or_equal_fecha_inicio[fecha-inicio]',
+                    'errors' => [
+                        'after_or_equal_fecha_inicio' => 'La fecha de finalización debe ser igual o posterior a la fecha de inicio',
+                    ]
+                ],
+            ]
             // otros tipos de constancia...
         ];
 

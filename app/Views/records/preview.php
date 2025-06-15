@@ -124,6 +124,10 @@
                         echo view('records/previews/aceptacion-cupo', ['data' => $data]);
                         break;
 
+                    case 'pasantias':
+                        echo view('records/previews/pasantias', ['data' => $data]);
+                        break;
+
                     default:
                         echo "<p>Tipo de constancia no soportado.</p>";
                         break;
@@ -268,6 +272,17 @@
                             'rsegundo_apellido' => 'Segundo apellido Representante',
                             'r-nacionalidad' => 'Nacionalidad Representante',
                             'r-cedula' => 'Cédula Representante',
+                        ],
+                        'pasantias' => [
+                            'primer_nombre' => 'Primer nombre',
+                            'segundo_nombre' => 'Segundo nombre',
+                            'primer_apellido' => 'Primer apellido',
+                            'segundo_apellido' => 'Segundo apellido',
+                            'nacionalidad' => 'Nacionalidad',
+                            'cedula' => 'Cédula',
+                            'nivel' => 'Nivel',
+                            'fecha-inicio' => 'Fecha de inicio',
+                            'fecha-fin' => 'Fecha de finalización',
                         ],
                     ];
                     $campos = $fieldsBySlug[$slug] ?? [];

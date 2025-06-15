@@ -537,6 +537,58 @@ $(document).ready(function () {
                 errorMsg: 'Debe contener solo números (1 a 2 dígitos).'
             },
         ],
+        'pasantias':
+        [
+            {
+                selector: '#primerNombre',
+                required: true,
+                pattern: /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/,
+                errorMsg: 'Debe contener solo letras'
+            },
+            {
+                selector: '#segundoNombre',
+                required: false,
+                pattern: /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/,
+                errorMsg: 'Debe contener solo letras'
+            },
+            {
+                selector: '#primerApellido',
+                required: true,
+                pattern: /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/,
+                errorMsg: 'Debe contener solo letras'
+            },
+            {
+                selector: '#segundoApellido',
+                required: false,
+                pattern: /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/,
+                errorMsg: 'Debe contener solo letras'
+            },
+            {
+                selector: '#cedula',
+                required: true,
+                pattern: /^\d{7,15}$/,
+                errorMsg: 'Debe contener solo números (7 a 15 dígitos).'
+            },
+            {
+                selector: '#fechaInicio',
+                required: true,
+                errorMsg: 'La fecha de inicio es obligatoria.'
+            },
+            {
+                selector: '#fechaFin',
+                required: true,
+                errorMsg: 'La fecha de finalización es obligatoria o la fecha de finalización no puede ser igual/anterior a la de inicio.',
+                customValidate: function(value) {
+                    const inicio = document.querySelector('#fechaInicio')?.value;
+                    if (!inicio || !value) return false;
+
+                    const fechaInicio = new Date(inicio);
+                    const fechaFin = new Date(value);
+
+                    return fechaFin > fechaInicio;
+                },
+            }
+        ],
     };
 
     const config = configs[slug];
