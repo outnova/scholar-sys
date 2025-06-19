@@ -163,7 +163,6 @@ class RecordsController extends BaseController
             'target_pa' => $data['primer_apellido'] ?? '',
             'target_sa' => $data['segundo_apellido'] ?? '',
             'cedula' => $targetCedula ?? '',
-            'nivel' => $data['nivel'] ?? '',
             'position' => $data['cargo_funciones'] ?? '',
             'position_code' => $data['codigo_cargo'] ?? '',
             'dependence' => $data['dependencia'] ?? '',
@@ -341,6 +340,14 @@ class RecordsController extends BaseController
                         'after_or_equal_fecha_inicio' => 'La fecha de finalización debe ser igual o posterior a la fecha de inicio',
                     ]
                 ],
+            ],
+            'aceptacion-recurso' => [
+                'primer_nombre' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'segundo_nombre' => 'permit_empty|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'primer_apellido' => 'required|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'segundo_apellido' => 'permit_empty|regex_match[/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/]',
+                'cedula' => 'required|regex_match[/^\d{7,15}$/]',
+                'cargo_funciones' => 'required|regex_match[/^[a-zA-Z0-9áéíóúÁÉÍÓÚüÜñÑ\s\/\-]+$/]',
             ]
             // otros tipos de constancia...
         ];
