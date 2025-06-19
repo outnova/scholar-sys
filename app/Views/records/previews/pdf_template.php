@@ -116,6 +116,10 @@ if (!is_file($imgPath)) {
                 echo view('records/previews/pasantias', ['data' => $data]);
                 break;
 
+            case 'aceptacion-recurso':
+                echo view('records/previews/aceptacion-recurso', ['data' => $data]);
+                break;
+
             default:
                 echo "<p>Tipo de constancia no soportado.</p>";
                 break;

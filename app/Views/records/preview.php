@@ -128,6 +128,10 @@
                         echo view('records/previews/pasantias', ['data' => $data]);
                         break;
 
+                    case 'aceptacion-recurso':
+                        echo view('records/previews/aceptacion-recurso', ['data' => $data]);
+                        break;
+
                     default:
                         echo "<p>Tipo de constancia no soportado.</p>";
                         break;
@@ -284,6 +288,16 @@
                             'fecha-inicio' => 'Fecha de inicio',
                             'fecha-fin' => 'Fecha de finalización',
                         ],
+                        'aceptacion-recurso' => [
+                            'primer_nombre' => 'Primer nombre',
+                            'segundo_nombre' => 'Segundo nombre',
+                            'primer_apellido' => 'Primer apellido',
+                            'segundo_apellido' => 'Segundo apellido',
+                            'nacionalidad' => 'Nacionalidad',
+                            'cedula' => 'Cédula',
+                            'cargo_funciones' => 'Cargo/Funciones',
+                            'nivel' => 'Nivel',
+                        ]
                     ];
                     $campos = $fieldsBySlug[$slug] ?? [];
                 ?>

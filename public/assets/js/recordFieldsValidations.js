@@ -589,6 +589,45 @@ $(document).ready(function () {
                 },
             }
         ],
+        'aceptacion-recurso':
+        [
+            {
+                selector: '#primerNombre',
+                required: true,
+                pattern: /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/,
+                errorMsg: 'Debe contener solo letras'
+            },
+            {
+                selector: '#segundoNombre',
+                required: false,
+                pattern: /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/,
+                errorMsg: 'Debe contener solo letras'
+            },
+            {
+                selector: '#primerApellido',
+                required: true,
+                pattern: /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/,
+                errorMsg: 'Debe contener solo letras'
+            },
+            {
+                selector: '#segundoApellido',
+                required: false,
+                pattern: /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$/,
+                errorMsg: 'Debe contener solo letras'
+            },
+            {
+                selector: '#cedula',
+                required: true,
+                pattern: /^\d{7,15}$/,
+                errorMsg: 'Debe contener solo números (7 a 15 dígitos).'
+            },
+            {
+                selector: '#cargoFunciones',
+                required: true,
+                pattern: /^[a-zA-Z0-9áéíóúÁÉÍÓÚüÜñÑ\s\/\-]+$/,
+                errorMsg: 'Solo letras, números, espacios y símbolos / -'
+            },
+        ]
     };
 
     const config = configs[slug];
