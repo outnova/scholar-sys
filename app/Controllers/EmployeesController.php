@@ -126,7 +126,7 @@ class EmployeesController extends BaseController
             'nivel' => ucwords(strtolower($this->request->getPost('nivel'))),
             'position' => ucwords(strtolower($this->request->getPost('cargo'))),
             'turn' => ucwords(strtolower($this->request->getPost('turno'))),
-            'active' => true,
+            'active' => 1,
         ];
 
         // Solo agregar segundo_nombre si no está vacío o nulo
