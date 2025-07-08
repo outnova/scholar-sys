@@ -37,7 +37,8 @@
                                 $employee['primer_nombre'] .
                                 (!empty($employee['segundo_nombre']) ? ' ' . $employee['segundo_nombre'] : '') .
                                 ' ' . $employee['primer_apellido'] .
-                                (!empty($employee['segundo_apellido']) ? ' ' . $employee['segundo_apellido'] : '')
+                                (!empty($employee['segundo_apellido']) ? ' ' . $employee['segundo_apellido'] : '') .
+                                ' (' . limpiarformatCedula($employee['cedula']) . ')'
                             ) ?>
                         </option>
                     <?php endforeach; ?>

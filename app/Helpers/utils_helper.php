@@ -47,6 +47,13 @@ function formatCedula($cedula) {
     return $cedula;
 }
 
+function limpiarformatCedula($cedulaFormateada) {
+    // Eliminar todos los puntos del string
+    $cedulaLimpia = str_replace('.', '', $cedulaFormateada);
+    
+    return $cedulaLimpia;
+}
+
 function formatPhone($telefono) {
     // Verificar si es un número válido (04XX seguido de 7 dígitos)
     if (preg_match('/^(\d{4})(\d{3})(\d{4})$/', $telefono, $matches)) {
