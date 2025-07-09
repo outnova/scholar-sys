@@ -211,7 +211,9 @@ class UsersController extends BaseController
 
         $this->userModel->update($userId, $data);
 
-        return redirect()->to('/home')->with('passwordUpdated', '¡Contraseña actualizada!');
+        session()->destroy();
+        
+        return view('password-updated');
     }
 
     public function view($id)
